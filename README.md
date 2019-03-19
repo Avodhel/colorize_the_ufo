@@ -1,3 +1,5 @@
-# ColorizetheUfo_Repo
+# Published on Google Play
 
-Repository for Colorize the Ufo mobile Game.
+# Google Play Link: https://play.google.com/store/apps/details?id=com.Nordicebear_Games.Colorize_the_Ufo
+
+# (っ▀¯▀)つ﻿
