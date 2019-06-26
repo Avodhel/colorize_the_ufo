@@ -86,10 +86,12 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         private void EnableControlRig(bool enabled)
         {
+//#if UNITY_ANDROID
             foreach (Transform t in transform)
             {
                 t.gameObject.SetActive(enabled);
             }
+//#endif
         }
 
 #if UNITY_EDITOR

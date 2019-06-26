@@ -60,8 +60,11 @@ public class UfoKontrol : MonoBehaviour
 
     void ufoHareket()
     {
-        //horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
+//#if UNITY_WEBGL
+        horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
+//#elif UNITY_ANDROID
         horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //mobilde hareket
+//#endif
         /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
         vec = new Vector3(horizontal * karakterHiz, fizik.velocity.y, 0); // sırasıyla parantez içi: x ekseninde 10 hızında koş | y eksenindeki hızım neyse o olsun |
         fizik.velocity = vec;
@@ -74,6 +77,17 @@ public class UfoKontrol : MonoBehaviour
 
     void ufoRenkDegistir()
     {
+//#if UNITY_WEBGL
+        if (Input.GetButtonDown("Jump"))
+        {
+            index += 1;
+            if (index == renkler.Length + 1)
+            {
+                index = 1;
+            }
+            spriteRenderer.color = renkler[index - 1];
+        }
+//#elif UNITY_ANDROID
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
             index += 1;
@@ -83,6 +97,7 @@ public class UfoKontrol : MonoBehaviour
             }
             spriteRenderer.color = renkler[index - 1];
         }
+//#endif
     }
 
     void enerjiBariKontrol()
@@ -270,7 +285,9 @@ public class UfoKontrol : MonoBehaviour
 
         if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
         {
+#if UNITY_ANDROID
             GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<ReklamKontrol>().reklamiGoster();
+#endif
             PlayerPrefs.SetInt("oyunBittiSayac", 0);
         }
     }

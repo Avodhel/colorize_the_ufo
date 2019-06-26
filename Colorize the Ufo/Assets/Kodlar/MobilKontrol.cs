@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MobilKontrol : MonoBehaviour {
-
+#if UNITY_ANDROIDk
     public Image leftImage;
     public Text leftText;
     public Image rightImage;
@@ -46,4 +46,5 @@ public class MobilKontrol : MonoBehaviour {
             changeColorText.enabled = false;
         }
     }
+#endif
 }
