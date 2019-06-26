@@ -77,7 +77,7 @@ public class UfoKontrol : MonoBehaviour
 
     void ufoRenkDegistir()
     {
-//#if UNITY_WEBGL
+#if UNITY_WEBGL
         if (Input.GetButtonDown("Jump"))
         {
             index += 1;
@@ -87,7 +87,7 @@ public class UfoKontrol : MonoBehaviour
             }
             spriteRenderer.color = renkler[index - 1];
         }
-//#elif UNITY_ANDROID
+#elif UNITY_ANDROID
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
             index += 1;
@@ -97,7 +97,7 @@ public class UfoKontrol : MonoBehaviour
             }
             spriteRenderer.color = renkler[index - 1];
         }
-//#endif
+#endif
     }
 
     void enerjiBariKontrol()
