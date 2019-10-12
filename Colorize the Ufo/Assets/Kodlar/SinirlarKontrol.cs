@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SinirlarKontrol : MonoBehaviour {
 
-    void OnTriggerExit2D(Collider2D col)
+    private void OnTriggerExit2D(Collider2D col)
     {
         if (transform.gameObject.tag == "yokEtSinir"  &&
             col.transform.tag        != "engellerTag" &&

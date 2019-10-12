@@ -1223,28 +1223,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114888570555167422, guid: 9ad9ae415842deb40b0365c5644d05ff,
+    - target: {fileID: 114800272090407106, guid: 9ad9ae415842deb40b0365c5644d05ff,
         type: 2}
       propertyPath: ufo
       value: 
       objectReference: {fileID: 1616721723}
-    - target: {fileID: 1153714111999796, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4130702587354768, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4130702587354768, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 212942194664487730, guid: 9ad9ae415842deb40b0365c5644d05ff,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
   m_IsPrefabAsset: 0

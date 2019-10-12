@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UcanCisimHareket : MonoBehaviour {
 
-    Rigidbody2D fizik;
-    public float cisimHizi;
-    public float kinematicYapmaSiniri;
+    public float cisimHizi = 2f;
+    public float kinematicYapmaSiniri = -4.3f;
     public Color[] cisimRenkler;
-    SpriteRenderer spriteRenderer;
     public Sprite[] meteorTipleri;
+
+    Rigidbody2D fizik;
+    SpriteRenderer spriteRenderer;
 
     void Start ()
     {

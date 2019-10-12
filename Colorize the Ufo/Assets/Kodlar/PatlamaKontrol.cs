@@ -2,95 +2,40 @@
 
 public class PatlamaKontrol : MonoBehaviour {
 
-    SpriteRenderer spriteRenderer;
-
+    [SerializeField]
     [Header("Explosion")]
-    public Sprite[] patlamaEfektler;
-    int patlamaSayac = 0;
-    float patlamaEfektZaman = 0f;
-    public bool patlamaKontrol = false;
+    private Sprite[] explosionEffectSprites;
 
-    [Header("Ufo Engine")]
-    public Sprite[] ufoMotorEfektler;
-    int motorSayac = 0;
-    float motorAnimasyonZaman = 0;
-    bool ileriGeriMotorKontrol = true;
+    private SpriteRenderer spriteRenderer;
 
-    [Header("Ufo Prefab")]
-    public GameObject ufo;
+    private int explosionTimer = 0;
+    private float explosionEffectTimer = 0f;
 
-    void Start ()
+    private void Start ()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 	
-	void Update ()
+	private void Update ()
     {
-        patlamaEfekti();
-        ufoMotorEfekti();
+        explosionEffect();
 	}
 
-    void LateUpdate()
+    private void explosionEffect()
     {
-        if (gameObject.transform.tag == "ufoMotorTag")
+        if (explosionEffectSprites.Length != 0)
         {
-            //alttaki kod satırı ile ufo motorunu, ufomuz ile birlikte hareket ettiriyoruz.
-            gameObject.transform.position = new Vector3( ufo.transform.position.x,
-                                                         gameObject.transform.position.y,
-                                                         ufo.transform.position.z);
-        }
-    }
-
-    void patlamaEfekti()
-    {
-        if (patlamaEfektler.Length != 0)
-        {
-            patlamaEfektZaman += Time.deltaTime;
-            if (patlamaEfektZaman > 0.2f)
+            explosionEffectTimer += Time.deltaTime;
+            if (explosionEffectTimer > 0.2f)
             {
-                if (patlamaKontrol && patlamaSayac < patlamaEfektler.Length)
+                if (explosionTimer < explosionEffectSprites.Length)
                 {
-                    spriteRenderer.sprite = patlamaEfektler[patlamaSayac];
+                    spriteRenderer.sprite = explosionEffectSprites[explosionTimer];
                     gameObject.transform.localScale = new Vector3(2f, 2f, gameObject.transform.localScale.z);
-                    patlamaSayac++;
-                    patlamaEfektZaman = 0f;
+                    explosionTimer++;
+                    explosionEffectTimer = 0f;
                 }
             }
-        }
-    }
-
-    void ufoMotorEfekti()
-    {
-        if (ufoMotorEfektler.Length != 0)
-        {
-            motorAnimasyonZaman += Time.deltaTime;
-            /*motor duman hızını düşürmek için koşul*/
-            if (motorAnimasyonZaman > 0.2f) // her 0.2 saniyede bir bu koşula girecek.
-            {
-                motorAnimasyonZaman = 0;
-                /*motor efekti için koşul*/
-                if (ileriGeriMotorKontrol)
-                {
-                    spriteRenderer.sprite = ufoMotorEfektler[motorSayac]; // ufomotorefektler'in içindeki 3 motor texture'ını sırasıyla oynatıyoruz.
-                    motorSayac++;
-                    if (motorSayac == ufoMotorEfektler.Length) // motor sayacı dizinin sonuna ulaştığında
-                    {
-                        motorSayac--; // iki kere aynı texture'ın üst üste oynatılmaması için
-                        ileriGeriMotorKontrol = false; // else'e girmesini sağlıyoruz.
-                    }
-                }
-                else
-                {
-                    motorSayac--; //if'den gelen motorSayac 3 olacak ve hata verecek bu hatanın önüne geçiyoruz.
-                    spriteRenderer.sprite = ufoMotorEfektler[motorSayac];
-                    if (motorSayac == 0)
-                    {
-                        motorSayac++; // iki kere aynı texture'ın üst üste oynatılmaması için
-                        ileriGeriMotorKontrol = true; //tekrar if'e girmesini sağlıyoruz.
-                    }
-                }
-            }
-
         }
     }
 }
