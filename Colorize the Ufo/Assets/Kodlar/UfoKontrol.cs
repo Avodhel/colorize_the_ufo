@@ -1,64 +1,86 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityStandardAssets.CrossPlatformInput; //mobil entegrasyon için kütüphane
-using UnityEngine.EventSystems;
+using UnityStandardAssets.CrossPlatformInput; //library for mobile entegration
 
 public class UfoKontrol : MonoBehaviour
 {
+    [Header("Ufo Speed")]
+    [SerializeField]
+    private float speed = 3.3f;
 
-    Rigidbody2D fizik;
-    float horizontal = 0f;
-    public float karakterHiz;
-    public float maxX;
-    public float minX;
-    Vector3 vec;
+    [Header("Movement Border")]
+    [SerializeField]
+    private float maxX = 3.1f;
+    [SerializeField]
+    private float minX = -3.1f;
+
+    [Header("Colors")]
+    [SerializeField]
+    private Color[] colors;
+    [SerializeField]
+    private Color[] healthBarColor;
+    [SerializeField]
+    private Color[] energyBarColor;
+
+    [Header("UI Objects")]
+    [SerializeField]
+    private Text pointText;
+    [SerializeField]
+    private Text point2Text;
+    [SerializeField]
+    private Text highScoreText;
+    [SerializeField]
+    private GameObject gameOverPanel;
+    [SerializeField]
+    private GameObject pauseGameButton;
+    [SerializeField]
+    private Image healthBar;
+    [SerializeField]
+    private Image energyBar;
+
+    [Header("Prefabs")]
+    [SerializeField]
+    private GameObject explosionPrefab;
+    [SerializeField]
+    private GameObject ufoEnginePrefab;
+
+    Rigidbody2D rb2d;
+    Vector3 vec3;
     SpriteRenderer spriteRenderer;
-    public Color[] renkler;
+
+    float horizontal = 0f;
     int index = 1;
-    public Text puanText;
-    public Text puan2Text;
-    public Text enYuksekPuanText;
     int puan = 0;
     int enYuksekPuan = 0;
-    public GameObject oyunBittiPanel;
-    public GameObject oyunuDurdurButonu;
-    public Image canBari;
-    public Image enerjiBari;
-    public Color[] canBariRenk;
-    public Color[] enerjiBariRenk;
-    public GameObject patlama;
-    public GameObject ufoMotor;
     int oyunBittiSayac = 0;
 
-    void Start()
+    private void Start()
     {
-        fizik = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        puanText.text = "Score: " + puan;
+        pointText.text = "Score: " + puan;
         enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
 
-        ufoMotor.SetActive(true); //ufo motoru görünür yap
+        ufoEnginePrefab.SetActive(true); //ufo motoru görünür yap
 
         //PlayerPrefs.DeleteAll();
     }
 
-    void Update()
+    private void Update()
     {
-        ufoRenkDegistir();
+        changeUfosColor();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        ufoHareket();
-        enerjiBariKontrol();
-        canBariKontrol();
+        ufoMovement();
+        healthBarControl();
+        energyBarControl();
     }
 
-    void ufoHareket()
+    private void ufoMovement()
     {
 //#if UNITY_WEBGL
         horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
@@ -66,26 +88,26 @@ public class UfoKontrol : MonoBehaviour
         horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //mobilde hareket
 //#endif
         /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
-        vec = new Vector3(horizontal * karakterHiz, fizik.velocity.y, 0); // sırasıyla parantez içi: x ekseninde 10 hızında koş | y eksenindeki hızım neyse o olsun |
-        fizik.velocity = vec;
+        vec3 = new Vector3(horizontal * speed, rb2d.velocity.y, 0); // sırasıyla parantez içi: x ekseninde 10 hızında koş | y eksenindeki hızım neyse o olsun |
+        rb2d.velocity = vec3;
 
-        fizik.position = new Vector3( // ufonun ekranın dışına çıkmaması için sınır koordinatlarını belirliyoruz.
-        Mathf.Clamp(fizik.position.x, minX, maxX),
+        rb2d.position = new Vector3( // ufonun ekranın dışına çıkmaması için sınır koordinatlarını belirliyoruz.
+        Mathf.Clamp(rb2d.position.x, minX, maxX),
         transform.position.y
         );
     }
 
-    void ufoRenkDegistir()
+    private void changeUfosColor()
     {
 #if UNITY_WEBGL
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Up") || Input.GetButtonDown("Down"))
         {
             index += 1;
-            if (index == renkler.Length + 1)
+            if (index == colors.Length + 1)
             {
                 index = 1;
             }
-            spriteRenderer.color = renkler[index - 1];
+            spriteRenderer.color = colors[index - 1];
         }
 #elif UNITY_ANDROID
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
@@ -100,50 +122,50 @@ public class UfoKontrol : MonoBehaviour
 #endif
     }
 
-    void enerjiBariKontrol()
+    private void energyBarControl()
     {
-        enerjiBari.fillAmount -= 0.00011f; //ufo ilerledikçe enerji barı azalıyor
-        if (enerjiBari.fillAmount == 0) //enerji bari sifirlaninca oyun bitsin
+        energyBar.fillAmount -= 0.00011f; //ufo ilerledikçe enerji barı azalıyor
+        if (energyBar.fillAmount == 0) //enerji bari sifirlaninca oyun bitsin
         {
             oyunBitti();
         }
 
-        if (enerjiBari.fillAmount >= 0.65f)
+        if (energyBar.fillAmount >= 0.65f)
         {
-            enerjiBari.color = enerjiBariRenk[0];
+            energyBar.color = energyBarColor[0];
         }
-        else if (enerjiBari.fillAmount >= 0.33f)
+        else if (energyBar.fillAmount >= 0.33f)
         {
-            enerjiBari.color = enerjiBariRenk[1];
+            energyBar.color = energyBarColor[1];
         }
         else
         {
-            enerjiBari.color = enerjiBariRenk[2];
+            energyBar.color = energyBarColor[2];
         }
     }
 
-    void canBariKontrol()
+    private void healthBarControl()
     {
-        if (canBari.fillAmount == 0) //can bari sifirlaninca oyun bitsin
+        if (healthBar.fillAmount == 0) //can bari sifirlaninca oyun bitsin
         {
             oyunBitti();
         }
 
-        if (canBari.fillAmount >= 0.65f)
+        if (healthBar.fillAmount >= 0.65f)
         {
-            canBari.color = canBariRenk[0];
+            healthBar.color = healthBarColor[0];
         }
-        else if (canBari.fillAmount >= 0.33f)
+        else if (healthBar.fillAmount >= 0.33f)
         {
-            canBari.color = canBariRenk[1];
+            healthBar.color = healthBarColor[1];
         }
         else
         {
-            canBari.color = canBariRenk[2];
+            healthBar.color = healthBarColor[2];
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col) // geçirgen olmayan bir yüzeye temas edildiğinde çalışır.
+    private void OnCollisionEnter2D(Collision2D col) // geçirgen olmayan bir yüzeye temas edildiğinde çalışır.
     {
         //ziplamaKontrol = true; // zıpladıktan sonra karakter yere değdiğinde zıplama tekrar aktif oluyor.
 
@@ -173,14 +195,14 @@ public class UfoKontrol : MonoBehaviour
                 FindObjectOfType<SesKontrol>().sesOynat("Puan"); //puan sesini oynat
                 Destroy(col.gameObject);
                 puan += 1;
-                puanText.text = "Score: " + puan;
-                enerjiBari.fillAmount += 0.005f; //cisim toplanınca enerji artıyor
+                pointText.text = "Score: " + puan;
+                energyBar.fillAmount += 0.005f; //cisim toplanınca enerji artıyor
             }
             else
             {
                 FindObjectOfType<SesKontrol>().sesOynat("Carpma"); //carpma sesini oynat
                 Destroy(col.gameObject);
-                canBari.fillAmount -= 0.25f;
+                healthBar.fillAmount -= 0.25f;
             }
         }
 
@@ -193,11 +215,11 @@ public class UfoKontrol : MonoBehaviour
 
         if (col.transform.tag == "canVerenCisimTag")
         {
-            if (canBari.fillAmount < 1) //can full değilse
+            if (healthBar.fillAmount < 1) //can full değilse
             {
                 FindObjectOfType<SesKontrol>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
-                canBari.fillAmount += 0.5f;
+                healthBar.fillAmount += 0.5f;
             }
             else
             {
@@ -207,11 +229,11 @@ public class UfoKontrol : MonoBehaviour
 
         if (col.transform.tag == "enerjiVerenCisimTag")
         {
-            if (enerjiBari.fillAmount < 1) //enerji full değilse
+            if (energyBar.fillAmount < 1) //enerji full değilse
             {
                 FindObjectOfType<SesKontrol>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
-                enerjiBari.fillAmount += 0.2f;
+                energyBar.fillAmount += 0.2f;
             }
             else
             {
@@ -234,48 +256,48 @@ public class UfoKontrol : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D col)
+    private void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == "randomEngelTag")
         {
             FindObjectOfType<SesKontrol>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
             puan += 5;
-            puanText.text = "Score: " + puan;
-            enerjiBari.fillAmount += 0.015f; //engel aşılınca enerji artıyor
+            pointText.text = "Score: " + puan;
+            energyBar.fillAmount += 0.015f; //engel aşılınca enerji artıyor
         }
     }
 
-    void anaMenuyeDon()
+    private void anaMenuyeDon()
     {
         SceneManager.LoadScene(0);
     }
 
-    public void yenidenBasla()
+    private void yenidenBasla()
     {
-        oyunBittiPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
         SceneManager.LoadScene(1);
     }
 
-    void oyunBitti()
+    private void oyunBitti()
     {
-        ufoMotor.SetActive(false); //ufo motoru görünmez yap
-        Instantiate(patlama, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
+        ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
+        Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
         FindObjectOfType<SesKontrol>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
         transform.gameObject.SetActive(false);
-        oyunBittiPanel.SetActive(true);
-        puan2Text.text = "Score: " + puan;
+        gameOverPanel.SetActive(true);
+        point2Text.text = "Score: " + puan;
 
         if (puan > enYuksekPuan) // en yüksek puan için koşul
         {
             enYuksekPuan = puan;
             PlayerPrefs.SetInt("enYuksekPuanKayit", enYuksekPuan); // en yüksek puanı kayıtlı tutuyoruz.
         }
-        enYuksekPuanText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
 
-        enerjiBari.fillAmount = 0; //enerji barını sıfırla
-        canBari.fillAmount = 0; //can barini sıfırla
+        energyBar.fillAmount = 0; //enerji barını sıfırla
+        healthBar.fillAmount = 0; //can barini sıfırla
 
-        oyunuDurdurButonu.SetActive(false);
+        pauseGameButton.SetActive(false);
 
         /*Reklam göster*/
         oyunBittiSayac = PlayerPrefs.GetInt("oyunBittiSayac");

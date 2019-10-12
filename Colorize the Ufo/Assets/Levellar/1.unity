@@ -815,6 +815,18 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1323495263321498, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096011248087656, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360222733899564, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
   m_IsPrefabAsset: 0
@@ -2380,31 +2392,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d77944400824cc42b105176322a3834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  karakterHiz: 3.3
+  speed: 3.3
   maxX: 3.1
   minX: -3.1
-  renkler:
+  colors:
   - {r: 0.49803922, g: 0.8, b: 0.19215687, a: 1}
   - {r: 0.19215687, g: 0.7058824, b: 0.8, a: 1}
   - {r: 0.64705884, g: 0.19215687, b: 0.8, a: 1}
   - {r: 0.85882354, g: 0.4745098, b: 0.078431375, a: 1}
-  puanText: {fileID: 103328717}
-  puan2Text: {fileID: 1632448488}
-  enYuksekPuanText: {fileID: 58483231}
-  oyunBittiPanel: {fileID: 1111096889}
-  oyunuDurdurButonu: {fileID: 931593149}
-  canBari: {fileID: 164098203}
-  enerjiBari: {fileID: 1126751171}
-  canBariRenk:
-  - {r: 0.0627451, g: 0.7058824, b: 0, a: 1}
-  - {r: 0.9433962, g: 0.53733706, b: 0.12014952, a: 1}
-  - {r: 0.8962264, g: 0.10568706, b: 0.10568706, a: 1}
-  enerjiBariRenk:
-  - {r: 0.003921569, g: 0.49411765, b: 0.7176471, a: 1}
-  - {r: 0.40610537, g: 0.63257766, b: 0.735849, a: 1}
-  - {r: 0.7815504, g: 0.83375984, b: 0.8584906, a: 1}
-  patlama: {fileID: 1699905320439584, guid: 0000b033031282049ac2a09e0d683a90, type: 2}
-  ufoMotor: {fileID: 1895383732}
+  healthBarColor:
+  - {r: 0.054901965, g: 0.63529414, b: 0, a: 1}
+  - {r: 0.8584906, g: 0.531522, b: 0.19842473, a: 1}
+  - {r: 0.7735849, g: 0.1788003, b: 0.1788003, a: 1}
+  energyBarColor:
+  - {r: 0.003921569, g: 0.44705886, b: 0.64705884, a: 1}
+  - {r: 0.45256317, g: 0.7257568, b: 0.8490566, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  pointText: {fileID: 103328717}
+  point2Text: {fileID: 1632448488}
+  highScoreText: {fileID: 58483231}
+  gameOverPanel: {fileID: 1111096889}
+  pauseGameButton: {fileID: 931593149}
+  healthBar: {fileID: 164098203}
+  energyBar: {fileID: 1126751171}
+  explosionPrefab: {fileID: 1699905320439584, guid: 0000b033031282049ac2a09e0d683a90,
+    type: 2}
+  ufoEnginePrefab: {fileID: 1895383732}
 --- !u!1 &1173083722
 GameObject:
   m_ObjectHideFlags: 0
