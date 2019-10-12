@@ -1,51 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OyunZorlukKontrol : MonoBehaviour {
 
-    float suredeBirArttirAzalt = 0f;
-    bool hizArttirAzalt = true;
+    float gameSpeedChangeTime = 0f;
+    bool gameSpeedControl = true;
 
-	void Start ()
+	private void Start ()
     {
         Time.timeScale = 1;
 	}
 	
-	void Update ()
+	private void Update ()
     {
-        oyunHiziniArttirAzalt();
+        gameSpeedChange();
     }
 
-    void oyunHiziniArttirAzalt()
+    private void gameSpeedChange()
     {
-        if (hizArttirAzalt)
+        //increase speed
+        if (gameSpeedControl)
         {
-            suredeBirArttirAzalt += Time.deltaTime;
+            gameSpeedChangeTime += Time.deltaTime;
 
-            while (suredeBirArttirAzalt > 8f) 
+            while (gameSpeedChangeTime > 8f) 
             {
                 Time.timeScale += 0.02f; //hizlanma birimi
-                //Debug.Log(Time.timeScale);
-                suredeBirArttirAzalt = 0f;
+                gameSpeedChangeTime = 0f;
                 if (Time.timeScale > Random.Range(1.4f, 1.7f)) //hiz için üst sınır
                 {
-                    hizArttirAzalt = false;
+                    gameSpeedControl = false;
                 }
             }
         }
+        //reduce speed
         else
         {
-            suredeBirArttirAzalt += Time.deltaTime;
+            gameSpeedChangeTime += Time.deltaTime;
 
-            while (suredeBirArttirAzalt > 5f)
+            while (gameSpeedChangeTime > 5f)
             {
                 Time.timeScale -= 0.06f; //azalma birimi
-                //Debug.Log(Time.timeScale);
-                suredeBirArttirAzalt = 0f;
+                gameSpeedChangeTime = 0f;
                 if (Time.timeScale < Random.Range(1f, 1.2f)) //hiz için alt sinir
                 {
-                    hizArttirAzalt = true;
+                    gameSpeedControl = true;
                 }
             }
         }

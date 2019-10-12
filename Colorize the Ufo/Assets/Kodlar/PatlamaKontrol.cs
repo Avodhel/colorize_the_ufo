@@ -1,21 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PatlamaKontrol : MonoBehaviour {
 
     SpriteRenderer spriteRenderer;
+
+    [Header("Explosion")]
     public Sprite[] patlamaEfektler;
     int patlamaSayac = 0;
     float patlamaEfektZaman = 0f;
-    //[HideInInspector]
     public bool patlamaKontrol = false;
 
+    [Header("Ufo Engine")]
     public Sprite[] ufoMotorEfektler;
     int motorSayac = 0;
     float motorAnimasyonZaman = 0;
     bool ileriGeriMotorKontrol = true;
 
+    [Header("Ufo Prefab")]
     public GameObject ufo;
 
     void Start ()
