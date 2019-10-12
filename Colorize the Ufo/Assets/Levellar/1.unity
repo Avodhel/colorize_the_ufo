@@ -415,6 +415,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114177654989462814, guid: 0e1141789030ec843b69b5a0e436989e,
+        type: 2}
+      propertyPath: splitSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e1141789030ec843b69b5a0e436989e, type: 2}
   m_IsPrefabAsset: 0
@@ -429,7 +434,7 @@ GameObject:
   - component: {fileID: 164098204}
   - component: {fileID: 164098203}
   m_Layer: 5
-  m_Name: can bari (1)
+  m_Name: can bari progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,7 +1221,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4130702587354768, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114888570555167422, guid: 9ad9ae415842deb40b0365c5644d05ff,
         type: 2}
@@ -1358,7 +1363,7 @@ Transform:
   m_LocalScale: {x: 7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -1464,7 +1469,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519974946
 MonoBehaviour:
@@ -1477,29 +1482,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf00bdd8037093a43bc6fbec5bf35b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engel: {fileID: 1122102879067562, guid: 552bbed0146c4124480c313af144af73, type: 2}
-  engelTipleri:
+  obstacleRate: 10
+  obstacleSpeed: 2
+  obstacleSpawnFrequency: 6
+  obstaclePrefab: {fileID: 1122102879067562, guid: 552bbed0146c4124480c313af144af73,
+    type: 2}
+  obstacleTypes:
   - {fileID: 1122102879067562, guid: 552bbed0146c4124480c313af144af73, type: 2}
   - {fileID: 1460009173523126, guid: 6cfed375221b09e45845a0560cc9b54c, type: 2}
   - {fileID: 1289454605808758, guid: 73fd27395c23b0e49854fef724a3b514, type: 2}
   - {fileID: 1585723348715358, guid: 0dfeead028d734741b2a7a1880e88cc1, type: 2}
   - {fileID: 1933314112199810, guid: 01e4ea6201801574d9f44b3110724265, type: 2}
-  kacAdetEngel: 10
-  engelHiz: 2
-  engelOlusmaAraligi: 6
-  renkler:
+  colors:
   - {r: 0.49803922, g: 0.8, b: 0.19215687, a: 1}
   - {r: 0.19215687, g: 0.7058824, b: 0.8, a: 1}
   - {r: 0.64705884, g: 0.19215687, b: 0.8, a: 1}
   - {r: 0.85882354, g: 0.4745098, b: 0.078431375, a: 1}
-  oyunuDurdurButonu: {fileID: 931593149}
-  oyunuDurdurSprite: {fileID: 21300006, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
-  oyunaDevamSprite: {fileID: 21300002, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
-  oyunDurduPanel: {fileID: 366599258}
-  sesiKapaAcButonu: {fileID: 1517436061}
-  sesiAcSprite: {fileID: 21300010, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
-  sesiKapaSprite: {fileID: 21300012, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
+  pauseGameButton: {fileID: 931593151}
+  soundMuteButton: {fileID: 1517436063}
+  gamePauseSprite: {fileID: 21300006, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
+  gameContinueSprite: {fileID: 21300002, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
+  soundUnmuteSprite: {fileID: 21300010, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
+  soundMuteSprite: {fileID: 21300012, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
   changeColorImage: {fileID: 1218486934}
+  gamePausedPanel: {fileID: 366599258}
 --- !u!1 &540815690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,7 +1856,7 @@ Transform:
   m_LocalScale: {x: 7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &731792018
 GameObject:
@@ -2322,7 +2328,7 @@ GameObject:
   - component: {fileID: 1126751172}
   - component: {fileID: 1126751171}
   m_Layer: 5
-  m_Name: enerji bari (1)
+  m_Name: enerji bari progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2470,7 +2476,7 @@ Transform:
   m_LocalScale: {x: 7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1218486934 stripped
 MonoBehaviour:
@@ -2896,7 +2902,7 @@ Transform:
   - {fileID: 570774755}
   - {fileID: 333874792}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632448486
 GameObject:

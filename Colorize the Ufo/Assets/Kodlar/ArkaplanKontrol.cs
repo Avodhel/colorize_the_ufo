@@ -1,21 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
 public class ArkaplanKontrol : MonoBehaviour
 { //!!önemli: arkaplan kaydirma için arayüzde arkaplani duplicate edip arkaplana ekledik. (parent-child hiyerarşisi)
 
-    public float kaymaHizi; //arkaplanın y eksenindeki kayma hızı
-    public float tileSizeY; // y ekseninde ne kadar birimlik bir alanda kayma işlemi gerçekleşecek.
-    private Vector2 baslangicPoz; //arkaplanımın başlangıç pozisyonu
+    [SerializeField]
+    [Range(0.1f, 1f)]
+    private float splitSpeed = 0.3f; //arkaplanın y eksenindeki kayma hızı
+    [SerializeField]
+    private float tileSizeY; // y ekseninde ne kadar birimlik bir alanda kayma işlemi gerçekleşecek.
 
-    void Start()
+    private Vector2 startPos; //arkaplanımın başlangıç pozisyonu
+
+    private void Start()
     {
-        baslangicPoz = transform.position; //arkaplanımızın pozisyonu
+        startPos = transform.position; //arkaplanımızın pozisyonu
     }
 
-    void Update()
+    private void Update()
     {
-        float yeniPoz = Mathf.Repeat(Time.time * kaymaHizi, tileSizeY); //yeni pozisyonun belirlenmesi
-        transform.position = baslangicPoz + Vector2.down * yeniPoz; //arkaplanımızın yeni pozisyona göre güncellenmesi
+        float newPos = Mathf.Repeat(Time.time * splitSpeed, tileSizeY); //yeni pozisyonun belirlenmesi
+        transform.position = startPos + Vector2.down * newPos; //arkaplanımızın yeni pozisyona göre güncellenmesi
     }
 }
