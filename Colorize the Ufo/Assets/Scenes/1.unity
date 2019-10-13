@@ -1271,16 +1271,16 @@ MonoBehaviour:
   - {fileID: 1027967247671528, guid: c99c60debf8a7e74e82c283939d36cef, type: 2}
   - {fileID: 1244297116287460, guid: de66bc0e1fc313e4c8a1f07f18c7ddb7, type: 2}
   - {fileID: 1641598314297410, guid: de4e6b8f060766b4fb7b08132a7dbdc7, type: 2}
-  baslangicBeklemeSuresi: 2
-  randomPozisyon: {x: 3, y: 5.5}
-  ucanCisimOlusturmaSuresi: 0.1
-  ucanCisimGrupOlusturmaSuresi: 5
-  minCisimSayisi: 12
-  maxCisimSayisi: 30
-  nadirCisimOlusturmaSuresi: 0.5
-  nadirCisimGrupOlusturmaSuresi: 5
-  minNadirCisimSayisi: 0
-  maxNadirCisimSayisi: 3
+  startSpawnTime: 2
+  randomPos: {x: 3, y: 5.5}
+  spawnFlyingStoneTime: 0.1
+  spawnFlyingStonesGroupTime: 5
+  minFlyingStonesRate: 12
+  maxFlyingStonesRate: 30
+  spawnRareObjectTime: 0.5
+  spawnRareObjectsGroupTime: 5
+  minRareObjectsRate: 0
+  maxRareObjectsRate: 3
 --- !u!4 &465909541
 Transform:
   m_ObjectHideFlags: 0
@@ -2197,7 +2197,7 @@ GameObject:
   - component: {fileID: 1093346839}
   - component: {fileID: 1093346838}
   m_Layer: 0
-  m_Name: ReklamKontrol
+  m_Name: AdControl
   m_TagString: reklamKontrolTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2384,11 +2384,6 @@ MonoBehaviour:
   speed: 3.3
   maxX: 3.1
   minX: -3.1
-  colors:
-  - {r: 0.49803922, g: 0.8, b: 0.19215687, a: 1}
-  - {r: 0.19215687, g: 0.7058824, b: 0.8, a: 1}
-  - {r: 0.64705884, g: 0.19215687, b: 0.8, a: 1}
-  - {r: 0.85882354, g: 0.4745098, b: 0.078431375, a: 1}
   healthBarColor:
   - {r: 0.054901965, g: 0.63529414, b: 0, a: 1}
   - {r: 0.8584906, g: 0.531522, b: 0.19842473, a: 1}

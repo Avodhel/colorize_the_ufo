@@ -34,7 +34,7 @@ public class UcanCisimlerKontrol : MonoBehaviour {
     [SerializeField]
     private int minRareObjectsRate = 0;
     [SerializeField]
-    private int maxRareObjectsRate = 5;
+    private int maxRareObjectsRate = 3;
 
     GameObject flyingStone;
     GameObject rareObject;
