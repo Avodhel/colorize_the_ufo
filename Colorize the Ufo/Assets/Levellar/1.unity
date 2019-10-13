@@ -205,7 +205,7 @@ RectTransform:
   - {fileID: 1111096890}
   - {fileID: 366599259}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1221,7 +1221,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4130702587354768, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114800272090407106, guid: 9ad9ae415842deb40b0365c5644d05ff,
         type: 2}
@@ -1258,7 +1258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe1711f978566c4a874b649e7245f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ucanCisimler:
+  flyingStones:
   - {fileID: 1829981314570466, guid: f1cae76415a19f44dbf0f861e77488ab, type: 2}
   - {fileID: 1965902836579154, guid: 2f0e1335cc06777459457c53dfabaca8, type: 2}
   - {fileID: 1042537107206218, guid: 9ae8d4f1beb7cc84f90853d3d90e1bc3, type: 2}
@@ -1266,21 +1266,21 @@ MonoBehaviour:
   - {fileID: 1822696911540940, guid: b8148574b0add2a4e9e086ed82eb2ddd, type: 2}
   - {fileID: 1990842687179014, guid: 27eb62ddceb89714ebb828129733f70b, type: 2}
   - {fileID: 1740043216755774, guid: ff6e6198bf2216549a0ec15cbffefe77, type: 2}
-  baslangicBeklemeSuresi: 2
-  minCisimSayisi: 12
-  maxCisimSayisi: 30
-  ucanCisimOlusturmaSuresi: 0.1
-  ucanCisimGrupOlusturmaSuresi: 5
-  randomPozisyon: {x: 3, y: 5.5}
-  nadirCisimler:
+  rareObjects:
   - {fileID: 1621300848377438, guid: 3017bd11c42d5374ebc32b1b35ef76dc, type: 2}
   - {fileID: 1027967247671528, guid: c99c60debf8a7e74e82c283939d36cef, type: 2}
   - {fileID: 1244297116287460, guid: de66bc0e1fc313e4c8a1f07f18c7ddb7, type: 2}
   - {fileID: 1641598314297410, guid: de4e6b8f060766b4fb7b08132a7dbdc7, type: 2}
-  minNadirCisimSayisi: 0
-  maxNadirCisimSayisi: 3
+  baslangicBeklemeSuresi: 2
+  randomPozisyon: {x: 3, y: 5.5}
+  ucanCisimOlusturmaSuresi: 0.1
+  ucanCisimGrupOlusturmaSuresi: 5
+  minCisimSayisi: 12
+  maxCisimSayisi: 30
   nadirCisimOlusturmaSuresi: 0.5
   nadirCisimGrupOlusturmaSuresi: 5
+  minNadirCisimSayisi: 0
+  maxNadirCisimSayisi: 3
 --- !u!4 &465909541
 Transform:
   m_ObjectHideFlags: 0
@@ -1292,7 +1292,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498337512
 GameObject:
@@ -1346,7 +1346,7 @@ Transform:
   m_LocalScale: {x: 7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -1839,7 +1839,7 @@ Transform:
   m_LocalScale: {x: 7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &731792018
 GameObject:
@@ -2459,7 +2459,7 @@ Transform:
   m_LocalScale: {x: 7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1218486934 stripped
 MonoBehaviour:
@@ -2617,7 +2617,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1607379315
 MonoBehaviour:
@@ -2885,7 +2885,7 @@ Transform:
   - {fileID: 570774755}
   - {fileID: 333874792}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632448486
 GameObject:

@@ -1,69 +1,88 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UcanCisimlerKontrol : MonoBehaviour {
 
-    public GameObject[] ucanCisimler;
-    GameObject ucanCisim;
-    public float baslangicBeklemeSuresi;
-    public int minCisimSayisi;
-    public int maxCisimSayisi;
-    public float ucanCisimOlusturmaSuresi;
-    public float ucanCisimGrupOlusturmaSuresi;
-    public Vector2 randomPozisyon;
+    [Header("Flying Stones")]
+    [SerializeField]
+    private GameObject[] flyingStones;
+    [Header("Rare Objects")]
+    [SerializeField]
+    private GameObject[] rareObjects;
 
-    public GameObject[] nadirCisimler;
-    GameObject nadirCisim;
-    public int minNadirCisimSayisi;
-    public int maxNadirCisimSayisi;
-    public float nadirCisimOlusturmaSuresi;
-    public float nadirCisimGrupOlusturmaSuresi;
+    [Header("Spawn Objects")]
+    [SerializeField]
+    private float startSpawnTime = 2f;
+    [SerializeField]
+    private Vector2 randomPos = new Vector2(3f, 5.5f);
 
-    void Start ()
+    [Header("Spawn Flying Stones")]
+    [SerializeField]
+    private float spawnFlyingStoneTime = 0.1f;
+    [SerializeField]
+    private float spawnFlyingStonesGroupTime = 5f;
+    [SerializeField]
+    private int minFlyingStonesRate = 12;
+    [SerializeField]
+    private int maxFlyingStonesRate = 30;
+
+    [Header("Spawn Rare Objects")]
+    [SerializeField]
+    private float spawnRareObjectTime = 0.5f;
+    [SerializeField]
+    private float spawnRareObjectsGroupTime = 5f;
+    [SerializeField]
+    private int minRareObjectsRate = 0;
+    [SerializeField]
+    private int maxRareObjectsRate = 5;
+
+    GameObject flyingStone;
+    GameObject rareObject;
+
+    private void Start ()
     {
-        StartCoroutine(randomCisimOlustur());
-        StartCoroutine(nadirCisimOlustur());
+        StartCoroutine(spawnFlyingStones());
+        StartCoroutine(spawnRareObjects());
 	}
 	
-    IEnumerator randomCisimOlustur()
+    private IEnumerator spawnFlyingStones()
     {
-        yield return new WaitForSeconds(baslangicBeklemeSuresi);
+        yield return new WaitForSeconds(startSpawnTime);
 
         while (true) // sonsuz bir döngü 
         {
-            for (int i = 0; i < Random.Range(minCisimSayisi, maxCisimSayisi); i++)
+            for (int i = 0; i < Random.Range(minFlyingStonesRate, maxFlyingStonesRate); i++)
             {
-                ucanCisim = ucanCisimler[Random.Range(0, ucanCisimler.Length)];
-                Vector2 vec = new Vector2(Random.Range(-randomPozisyon.x, randomPozisyon.x), randomPozisyon.y);
-                if (ucanCisim.tag == "meteorTag")
+                flyingStone = flyingStones[Random.Range(0, flyingStones.Length)];
+                Vector2 vec = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
+                if (flyingStone.tag == "meteorTag")
                 {
-                    Instantiate(ucanCisim, vec, Quaternion.identity);
+                    Instantiate(flyingStone, vec, Quaternion.identity);
                 }
                 else
                 {
-                    Instantiate(ucanCisim, vec, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+                    Instantiate(flyingStone, vec, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 }
-                yield return new WaitForSeconds(ucanCisimOlusturmaSuresi);
+                yield return new WaitForSeconds(spawnFlyingStoneTime);
             }
-            yield return new WaitForSeconds(ucanCisimGrupOlusturmaSuresi);
+            yield return new WaitForSeconds(spawnFlyingStonesGroupTime);
         }
     }
 
-    IEnumerator nadirCisimOlustur()
+    private IEnumerator spawnRareObjects()
     {
         yield return new WaitForSeconds(20); //başlangıç bekleme suresi
 
         while (true)
         {
-            for (int i = 0; i < Random.Range(minNadirCisimSayisi, maxNadirCisimSayisi); i++)
+            for (int i = 0; i < Random.Range(minRareObjectsRate, maxRareObjectsRate); i++)
             {
-                nadirCisim = nadirCisimler[Random.Range(0, nadirCisimler.Length)];
-                Vector2 vec = new Vector2(Random.Range(-randomPozisyon.x, randomPozisyon.x), randomPozisyon.y);
-                Instantiate(nadirCisim, vec, Quaternion.identity);
-                yield return new WaitForSeconds(nadirCisimOlusturmaSuresi);
+                rareObject = rareObjects[Random.Range(0, rareObjects.Length)];
+                Vector2 vec = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
+                Instantiate(rareObject, vec, Quaternion.identity);
+                yield return new WaitForSeconds(spawnRareObjectTime);
             }
-            yield return new WaitForSeconds(nadirCisimGrupOlusturmaSuresi);
+            yield return new WaitForSeconds(spawnRareObjectsGroupTime);
         }
     }
 }
