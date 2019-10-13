@@ -8,19 +8,19 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1042537107206218}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1042537107206218
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4493262144033954}
-  - component: {fileID: 212628715994391986}
   - component: {fileID: 114526485670054900}
+  - component: {fileID: 212628715994391986}
   - component: {fileID: 50308309799966282}
   - component: {fileID: 68456752645539536}
   m_Layer: 0
@@ -33,7 +33,7 @@ GameObject:
 --- !u!4 &4493262144033954
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042537107206218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -47,7 +47,7 @@ Transform:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042537107206218}
   m_BodyType: 0
@@ -66,7 +66,7 @@ Rigidbody2D:
 --- !u!68 &68456752645539536
 EdgeCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042537107206218}
   m_Enabled: 1
@@ -92,7 +92,7 @@ EdgeCollider2D:
 --- !u!114 &114526485670054900
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042537107206218}
   m_Enabled: 1
@@ -100,18 +100,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a0b8ade45132644a6238dec1e001e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cisimHizi: 2
-  kinematicYapmaSiniri: -4.3
-  cisimRenkler:
-  - {r: 0.49803922, g: 0.8, b: 0.19215687, a: 1}
-  - {r: 0.19215687, g: 0.7058824, b: 0.8, a: 1}
-  - {r: 0.64705884, g: 0.19215687, b: 0.8, a: 1}
-  - {r: 0.85882354, g: 0.4745098, b: 0.078431375, a: 1}
-  meteorTipleri: []
+  objectSpeed: 2
+  makeKinematicBorder: -4.3
+  rb2d: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  colors:
+  - {r: 0.49803925, g: 0.8000001, b: 0.19215688, a: 1}
+  - {r: 0.19215688, g: 0.7058824, b: 0.8000001, a: 1}
+  - {r: 0.64705884, g: 0.19215688, b: 0.8000001, a: 1}
+  - {r: 0.8588236, g: 0.47450984, b: 0.078431375, a: 1}
 --- !u!212 &212628715994391986
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042537107206218}
   m_Enabled: 1
@@ -153,3 +154,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

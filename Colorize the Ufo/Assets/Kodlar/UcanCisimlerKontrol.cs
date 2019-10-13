@@ -26,11 +26,6 @@ public class UcanCisimlerKontrol : MonoBehaviour {
         StartCoroutine(nadirCisimOlustur());
 	}
 	
-	void Update ()
-    {
-		
-	}
-
     IEnumerator randomCisimOlustur()
     {
         yield return new WaitForSeconds(baslangicBeklemeSuresi);
@@ -65,7 +60,7 @@ public class UcanCisimlerKontrol : MonoBehaviour {
             {
                 nadirCisim = nadirCisimler[Random.Range(0, nadirCisimler.Length)];
                 Vector2 vec = new Vector2(Random.Range(-randomPozisyon.x, randomPozisyon.x), randomPozisyon.y);
-                    Instantiate(nadirCisim, vec, Quaternion.identity);
+                Instantiate(nadirCisim, vec, Quaternion.identity);
                 yield return new WaitForSeconds(nadirCisimOlusturmaSuresi);
             }
             yield return new WaitForSeconds(nadirCisimGrupOlusturmaSuresi);

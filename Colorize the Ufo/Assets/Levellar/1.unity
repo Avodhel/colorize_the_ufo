@@ -1280,7 +1280,7 @@ MonoBehaviour:
   minNadirCisimSayisi: 0
   maxNadirCisimSayisi: 3
   nadirCisimOlusturmaSuresi: 0.5
-  nadirCisimGrupOlusturmaSuresi: 25
+  nadirCisimGrupOlusturmaSuresi: 5
 --- !u!4 &465909541
 Transform:
   m_ObjectHideFlags: 0
@@ -2676,9 +2676,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616721728}
+  - component: {fileID: 1158392319}
   - component: {fileID: 1616721727}
   - component: {fileID: 1616721726}
-  - component: {fileID: 1158392319}
   - component: {fileID: 1616721725}
   - component: {fileID: 1616721724}
   m_Layer: 0

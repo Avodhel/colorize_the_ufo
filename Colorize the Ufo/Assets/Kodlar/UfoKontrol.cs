@@ -54,6 +54,7 @@ public class UfoKontrol : MonoBehaviour
     int puan = 0;
     int enYuksekPuan = 0;
     int oyunBittiSayac = 0;
+    bool moveControl = true;
 
     private void Start()
     {
@@ -86,11 +87,14 @@ public class UfoKontrol : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
 //#elif UNITY_ANDROID
         horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //mobilde hareket
-//#endif
-        /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
-        vec3 = new Vector3(horizontal * speed, rb2d.velocity.y, 0); // sırasıyla parantez içi: x ekseninde 10 hızında koş | y eksenindeki hızım neyse o olsun |
-        rb2d.velocity = vec3;
-
+                                                                         //#endif
+                                                                         /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
+        if (moveControl)
+        {
+            vec3 = new Vector3(horizontal * speed, rb2d.velocity.y, 0); // sırasıyla parantez içi: x ekseninde 10 hızında koş | y eksenindeki hızım neyse o olsun |
+            rb2d.velocity = vec3;
+        }
+  
         rb2d.position = new Vector3( // ufonun ekranın dışına çıkmaması için sınır koordinatlarını belirliyoruz.
         Mathf.Clamp(rb2d.position.x, minX, maxX),
         transform.position.y
@@ -124,10 +128,10 @@ public class UfoKontrol : MonoBehaviour
 
     private void energyBarControl()
     {
-        energyBar.fillAmount -= 0.00011f; //ufo ilerledikçe enerji barı azalıyor
-        if (energyBar.fillAmount == 0) //enerji bari sifirlaninca oyun bitsin
+        energyBar.fillAmount -= 0.00020f; //ufo ilerledikçe enerji barı azalıyor
+        if (energyBar.fillAmount == 0) //enerji bari sifirlaninca ufo hareket edemesin.
         {
-            oyunBitti();
+            moveControl = false;
         }
 
         if (energyBar.fillAmount >= 0.65f)
@@ -234,6 +238,7 @@ public class UfoKontrol : MonoBehaviour
                 FindObjectOfType<SesKontrol>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
                 energyBar.fillAmount += 0.2f;
+                moveControl = true;
             }
             else
             {
