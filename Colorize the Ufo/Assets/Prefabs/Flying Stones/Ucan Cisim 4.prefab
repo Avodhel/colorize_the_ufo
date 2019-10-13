@@ -106,11 +106,6 @@ MonoBehaviour:
   makeKinematicBorder: -4.3
   rb2d: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  colors:
-  - {r: 0.49803925, g: 0.8000001, b: 0.19215688, a: 1}
-  - {r: 0.19215688, g: 0.7058824, b: 0.8000001, a: 1}
-  - {r: 0.64705884, g: 0.19215688, b: 0.8000001, a: 1}
-  - {r: 0.8588236, g: 0.47450984, b: 0.078431375, a: 1}
 --- !u!212 &212305465696291622
 SpriteRenderer:
   m_ObjectHideFlags: 1

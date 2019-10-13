@@ -16,8 +16,8 @@ public class UfoKontrol : MonoBehaviour
     private float minX = -3.1f;
 
     [Header("Colors")]
-    [SerializeField]
-    private Color[] colors;
+    //[SerializeField]
+    //private Color[] colors;
     [SerializeField]
     private Color[] healthBarColor;
     [SerializeField]
@@ -45,23 +45,31 @@ public class UfoKontrol : MonoBehaviour
     [SerializeField]
     private GameObject ufoEnginePrefab;
 
-    Rigidbody2D rb2d;
-    Vector3 vec3;
-    SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb2d;
+    private Vector3 vec3;
+    private SpriteRenderer spriteRenderer;
+    private GameObject gameControl;
+    private Color[] colors;
 
-    float horizontal = 0f;
-    int index = 1;
-    int puan = 0;
-    int enYuksekPuan = 0;
-    int oyunBittiSayac = 0;
-    bool moveControl = true;
+    private float horizontal = 0f;
+    private int index = 1;
+    private int point = 0;
+    private int enYuksekPuan = 0;
+    private int gameOverTimer = 0;
+    private bool moveControl = true;
+
+    private void Awake()
+    {
+        gameControl = GameObject.FindGameObjectWithTag("oyunKontrolTag");
+        colors = gameControl.GetComponent<OyunKontrol>().colors;
+    }
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        pointText.text = "Score: " + puan;
+        pointText.text = "Score: " + point;
         enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
 
         ufoEnginePrefab.SetActive(true); //ufo motoru görünür yap
@@ -198,8 +206,8 @@ public class UfoKontrol : MonoBehaviour
             {
                 FindObjectOfType<SesKontrol>().sesOynat("Puan"); //puan sesini oynat
                 Destroy(col.gameObject);
-                puan += 1;
-                pointText.text = "Score: " + puan;
+                point += 1;
+                pointText.text = "Score: " + point;
                 energyBar.fillAmount += 0.005f; //cisim toplanınca enerji artıyor
             }
             else
@@ -266,8 +274,8 @@ public class UfoKontrol : MonoBehaviour
         if (col.gameObject.tag == "randomEngelTag")
         {
             FindObjectOfType<SesKontrol>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
-            puan += 5;
-            pointText.text = "Score: " + puan;
+            point += 5;
+            pointText.text = "Score: " + point;
             energyBar.fillAmount += 0.015f; //engel aşılınca enerji artıyor
         }
     }
@@ -290,11 +298,11 @@ public class UfoKontrol : MonoBehaviour
         FindObjectOfType<SesKontrol>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
         transform.gameObject.SetActive(false);
         gameOverPanel.SetActive(true);
-        point2Text.text = "Score: " + puan;
+        point2Text.text = "Score: " + point;
 
-        if (puan > enYuksekPuan) // en yüksek puan için koşul
+        if (point > enYuksekPuan) // en yüksek puan için koşul
         {
-            enYuksekPuan = puan;
+            enYuksekPuan = point;
             PlayerPrefs.SetInt("enYuksekPuanKayit", enYuksekPuan); // en yüksek puanı kayıtlı tutuyoruz.
         }
         highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
@@ -305,10 +313,10 @@ public class UfoKontrol : MonoBehaviour
         pauseGameButton.SetActive(false);
 
         /*Reklam göster*/
-        oyunBittiSayac = PlayerPrefs.GetInt("oyunBittiSayac");
-        oyunBittiSayac++;
-        PlayerPrefs.SetInt("oyunBittiSayac", oyunBittiSayac);
-        Debug.Log(oyunBittiSayac);
+        gameOverTimer = PlayerPrefs.GetInt("oyunBittiSayac");
+        gameOverTimer++;
+        PlayerPrefs.SetInt("oyunBittiSayac", gameOverTimer);
+        Debug.Log(gameOverTimer);
 
         if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
         {

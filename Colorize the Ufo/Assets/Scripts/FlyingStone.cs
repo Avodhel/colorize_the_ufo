@@ -2,13 +2,22 @@
 
 public class FlyingStone : SpaceObject {
 
-    [SerializeField]
     private Color[] colors;
+    private GameObject gameControl;
+
+    private void Awake()
+    {
+        gameControl = GameObject.FindGameObjectWithTag("oyunKontrolTag");
+        colors = gameControl.GetComponent<OyunKontrol>().colors;
+    }
 
     private new void Start()
     {
         base.Start();
-        chooseColor();
+        if (gameObject.tag == "ucanCisimTag")
+        {
+            chooseColor();
+        }
     }
 
     private new void Update()

@@ -19,8 +19,7 @@ public class OyunKontrol : MonoBehaviour
     private GameObject[] obstacleTypes;
 
     [Header("Colors")]
-    [SerializeField]
-    private Color[] colors;
+    public Color[] colors;
 
     [Header("UI Elements")]
     [SerializeField]
