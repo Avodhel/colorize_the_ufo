@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class OyunKontrol : MonoBehaviour
+public class GameControl : MonoBehaviour
 {
     [Header("Obstacle")]
     [SerializeField]

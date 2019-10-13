@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MobilKontrol : MonoBehaviour {
+public class MobileControl : MonoBehaviour {
 #if UNITY_ANDROIDk
     public Image leftImage;
     public Text leftText;

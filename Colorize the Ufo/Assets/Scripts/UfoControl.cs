@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput; //library for mobile entegration
 
-public class UfoKontrol : MonoBehaviour
+public class UfoControl : MonoBehaviour
 {
     [Header("Ufo Speed")]
     [SerializeField]
@@ -61,7 +61,7 @@ public class UfoKontrol : MonoBehaviour
     private void Awake()
     {
         gameControl = GameObject.FindGameObjectWithTag("oyunKontrolTag");
-        colors = gameControl.GetComponent<OyunKontrol>().colors;
+        colors = gameControl.GetComponent<GameControl>().colors;
     }
 
     private void Start()

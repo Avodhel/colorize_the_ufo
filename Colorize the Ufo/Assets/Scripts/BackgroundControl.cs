@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ArkaplanKontrol : MonoBehaviour
+public class BackgroundControl : MonoBehaviour
 { //!!önemli: arkaplan kaydirma için arayüzde arkaplani duplicate edip arkaplana ekledik. (parent-child hiyerarşisi)
 
     [SerializeField]

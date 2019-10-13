@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SinirlarKontrol : MonoBehaviour {
+public class BordersControl : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D col)
     {

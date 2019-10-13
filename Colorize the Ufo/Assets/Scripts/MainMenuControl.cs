@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AnaMenuKontrol : MonoBehaviour {
+public class MainMenuControl : MonoBehaviour {
 
     public void oyunaBasla()
     {

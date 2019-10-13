@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class UcanCisimlerKontrol : MonoBehaviour {
+public class SpaceObjectsControl : MonoBehaviour {
 
     [Header("Flying Stones")]
     [SerializeField]

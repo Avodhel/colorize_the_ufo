@@ -8,7 +8,7 @@ public class FlyingStone : SpaceObject {
     private void Awake()
     {
         gameControl = GameObject.FindGameObjectWithTag("oyunKontrolTag");
-        colors = gameControl.GetComponent<OyunKontrol>().colors;
+        colors = gameControl.GetComponent<GameControl>().colors;
     }
 
     private new void Start()

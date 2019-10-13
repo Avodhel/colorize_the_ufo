@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class OyunZorlukKontrol : MonoBehaviour {
+public class GameSpeedControl : MonoBehaviour {
 
     float gameSpeedChangeTime = 0f;
     bool gameSpeedControl = true;

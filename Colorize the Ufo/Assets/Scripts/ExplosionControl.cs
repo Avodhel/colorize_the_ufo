@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PatlamaKontrol : MonoBehaviour {
+public class ExplosionControl : MonoBehaviour {
 
     [SerializeField]
     [Header("Explosion")]
