@@ -125,11 +125,11 @@ public class UfoControl : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
             index += 1;
-            if (index == renkler.Length + 1)
+            if (index == colors.Length + 1)
             {
                 index = 1;
             }
-            spriteRenderer.color = renkler[index - 1];
+            spriteRenderer.color = colors[index - 1];
         }
 #endif
     }
@@ -321,7 +321,7 @@ public class UfoControl : MonoBehaviour
         if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
         {
 #if UNITY_ANDROID
-            GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<ReklamKontrol>().reklamiGoster();
+            GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<AdControl>().reklamiGoster();
 #endif
             PlayerPrefs.SetInt("oyunBittiSayac", 0);
         }
