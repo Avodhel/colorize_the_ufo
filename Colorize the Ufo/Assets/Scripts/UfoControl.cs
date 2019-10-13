@@ -204,7 +204,7 @@ public class UfoControl : MonoBehaviour
         {
             if (col.transform.GetComponent<SpriteRenderer>().color == transform.GetComponent<SpriteRenderer>().color)
             {
-                FindObjectOfType<SesKontrol>().sesOynat("Puan"); //puan sesini oynat
+                FindObjectOfType<SoundControl>().sesOynat("Puan"); //puan sesini oynat
                 Destroy(col.gameObject);
                 point += 1;
                 pointText.text = "Score: " + point;
@@ -212,7 +212,7 @@ public class UfoControl : MonoBehaviour
             }
             else
             {
-                FindObjectOfType<SesKontrol>().sesOynat("Carpma"); //carpma sesini oynat
+                FindObjectOfType<SoundControl>().sesOynat("Carpma"); //carpma sesini oynat
                 Destroy(col.gameObject);
                 healthBar.fillAmount -= 0.25f;
             }
@@ -229,7 +229,7 @@ public class UfoControl : MonoBehaviour
         {
             if (healthBar.fillAmount < 1) //can full değilse
             {
-                FindObjectOfType<SesKontrol>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
+                FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
                 healthBar.fillAmount += 0.5f;
             }
@@ -243,7 +243,7 @@ public class UfoControl : MonoBehaviour
         {
             if (energyBar.fillAmount < 1) //enerji full değilse
             {
-                FindObjectOfType<SesKontrol>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
+                FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
                 energyBar.fillAmount += 0.2f;
                 moveControl = true;
@@ -258,7 +258,7 @@ public class UfoControl : MonoBehaviour
         {
             if (Time.timeScale > 1) //hiz 1'den büyükse
             {
-                FindObjectOfType<SesKontrol>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
+                FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
                 Destroy(col.gameObject);
                 Time.timeScale = 1;
             }
@@ -273,7 +273,7 @@ public class UfoControl : MonoBehaviour
     {
         if (col.gameObject.tag == "randomEngelTag")
         {
-            FindObjectOfType<SesKontrol>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
+            FindObjectOfType<SoundControl>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
             point += 5;
             pointText.text = "Score: " + point;
             energyBar.fillAmount += 0.015f; //engel aşılınca enerji artıyor
@@ -295,7 +295,7 @@ public class UfoControl : MonoBehaviour
     {
         ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
         Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
-        FindObjectOfType<SesKontrol>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
+        FindObjectOfType<SoundControl>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
         transform.gameObject.SetActive(false);
         gameOverPanel.SetActive(true);
         point2Text.text = "Score: " + point;

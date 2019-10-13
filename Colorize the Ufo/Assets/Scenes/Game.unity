@@ -2630,7 +2630,7 @@ GameObject:
   - component: {fileID: 1607379314}
   - component: {fileID: 1607379315}
   m_Layer: 0
-  m_Name: SesKontrol
+  m_Name: SoundControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

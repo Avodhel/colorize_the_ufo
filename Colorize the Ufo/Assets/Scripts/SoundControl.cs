@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System;
 
-public class SesKontrol : MonoBehaviour {
+public class SoundControl : MonoBehaviour {
 
-    public SeslerListesi[] sesler; //seslerlistesi classımıza erişiyoruz.
+    public SoundsList[] sesler; //seslerlistesi classımıza erişiyoruz.
 
 	void Awake () //start metoduna benzer ancak oyun başladığından değil başlamadan önce çalışır
     {
-        foreach (SeslerListesi s in sesler) //sesler listesindeki her bir ses(s) için
+        foreach (SoundsList s in sesler) //sesler listesindeki her bir ses(s) için
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -20,7 +20,7 @@ public class SesKontrol : MonoBehaviour {
 
     public void sesOynat(string sesAdi) //bu metot ile ismine göre seslerimizi istediğimiz yerde oynatacağız.
     {
-        SeslerListesi s =  Array.Find(sesler, ses => ses.sesAdi == sesAdi);
+        SoundsList s =  Array.Find(sesler, ses => ses.sesAdi == sesAdi);
         if (s == null)
         {
             Debug.LogWarning(sesAdi + " adli ses dosyasi bulunamadi." );

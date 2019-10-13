@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable] //diğer classlardan erişilebilmesi için
-public class SeslerListesi { //sesler için oluşturduğumuz class
+public class SoundsList { //sesler için oluşturduğumuz class
 
     public string sesAdi;
     public AudioClip clip;
