@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class GameControl : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField]
-    private Button pauseGameButton;
+    private GameObject pauseGameButton;
     [SerializeField]
     private Button soundMuteButton;
     [SerializeField]
@@ -38,14 +39,35 @@ public class GameControl : MonoBehaviour
     private Image changeColorImage;
     [SerializeField]
     private GameObject gamePausedPanel;
+    [SerializeField]
+    private GameObject gameOverPanel;
+    [SerializeField]
+    private Text pointText;
+    [SerializeField]
+    private Text point2Text;
+    [SerializeField]
+    private Text highScoreText;
 
-    GameObject[] obstacles;
-    GameObject obstacleChilds;
+    private GameObject[] obstacles;
+    private GameObject obstacleChilds;
 
-    float gamePausedTimeScale;
-    float changeObstacleTime = 0f;
-    int timer = 0;
-    int firstPlay;
+    private float gamePausedTimeScale;
+    private float changeObstacleTime = 0f;
+    private int timer = 0;
+    private int firstPlay;
+    private int point = 0;
+    private int enYuksekPuan = 0;
+    private int gameOverCounter = 0;
+
+    public static GameControl gameManager { get; private set; } //basic singleton
+
+    private void Awake()
+    {
+        gameManager = this;
+
+        pointText.text = "Score: " + point;
+        enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
+    }
 
     private void Start()
     {
@@ -110,6 +132,37 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    public void increaseScore(int value)
+    {
+        point += value;
+        pointText.text = "Score: " + point;
+    }
+
+    public void gameOver()
+    {
+        gameOverPanel.SetActive(true);
+        point2Text.text = "Score: " + point;
+        assignHighscore();
+        pauseGameButton.SetActive(false);
+        showAd();
+    }
+
+    private void assignHighscore()
+    {
+        if (point > enYuksekPuan) // en yüksek puan için koşul
+        {
+            enYuksekPuan = point;
+            PlayerPrefs.SetInt("enYuksekPuanKayit", enYuksekPuan); // en yüksek puanı kayıtlı tutuyoruz.
+        }
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
+    }
+
+    public void yenidenBasla()
+    {
+        gameOverPanel.SetActive(false);
+        SceneManager.LoadScene(1);
+    }
+
     public void oyunuDurdurveDevamEt() //oyunu durdur butonuna basıldığında
     {
         if (Time.timeScale >= 1) //oyun devam ediyorsa
@@ -172,4 +225,19 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    private void showAd()
+    {
+        gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
+        gameOverCounter++;
+        PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
+        Debug.Log(gameOverCounter);
+
+        if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
+        {
+#if UNITY_ANDROID
+            GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<AdControl>().reklamiGoster();
+#endif
+            PlayerPrefs.SetInt("oyunBittiSayac", 0);
+        }
+    }
 }

@@ -25,16 +25,6 @@ public class UfoControl : MonoBehaviour
 
     [Header("UI Objects")]
     [SerializeField]
-    private Text pointText;
-    [SerializeField]
-    private Text point2Text;
-    [SerializeField]
-    private Text highScoreText;
-    [SerializeField]
-    private GameObject gameOverPanel;
-    [SerializeField]
-    private GameObject pauseGameButton;
-    [SerializeField]
     private Image healthBar;
     [SerializeField]
     private Image energyBar;
@@ -48,20 +38,15 @@ public class UfoControl : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector3 vec3;
     private SpriteRenderer spriteRenderer;
-    private GameObject gameControl;
     private Color[] colors;
 
     private float horizontal = 0f;
     private int index = 1;
-    private int point = 0;
-    private int enYuksekPuan = 0;
-    private int gameOverTimer = 0;
     private bool moveControl = true;
 
     private void Awake()
     {
-        gameControl = GameObject.FindGameObjectWithTag("oyunKontrolTag");
-        colors = gameControl.GetComponent<GameControl>().colors;
+        colors = GameControl.gameManager.colors;
     }
 
     private void Start()
@@ -69,12 +54,9 @@ public class UfoControl : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        pointText.text = "Score: " + point;
-        enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
+
 
         ufoEnginePrefab.SetActive(true); //ufo motoru görünür yap
-
-        //PlayerPrefs.DeleteAll();
     }
 
     private void Update()
@@ -160,7 +142,7 @@ public class UfoControl : MonoBehaviour
     {
         if (healthBar.fillAmount == 0) //can bari sifirlaninca oyun bitsin
         {
-            oyunBitti();
+            ufoExploded();
         }
 
         if (healthBar.fillAmount >= 0.65f)
@@ -197,7 +179,7 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "oyunBittiSinirTag") // eğer ufo ezildiyse
         {
-            oyunBitti();
+            ufoExploded();
         }
 
         if (col.transform.tag == "ucanCisimTag")
@@ -206,8 +188,7 @@ public class UfoControl : MonoBehaviour
             {
                 FindObjectOfType<SoundControl>().sesOynat("Puan"); //puan sesini oynat
                 Destroy(col.gameObject);
-                point += 1;
-                pointText.text = "Score: " + point;
+                GameControl.gameManager.increaseScore(1);
                 energyBar.fillAmount += 0.005f; //cisim toplanınca enerji artıyor
             }
             else
@@ -221,7 +202,7 @@ public class UfoControl : MonoBehaviour
         if (col.transform.tag == "meteorTag")
         {
             Destroy(col.gameObject);
-            oyunBitti();
+            ufoExploded();
         }
 
 
@@ -274,56 +255,35 @@ public class UfoControl : MonoBehaviour
         if (col.gameObject.tag == "randomEngelTag")
         {
             FindObjectOfType<SoundControl>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
-            point += 5;
-            pointText.text = "Score: " + point;
+            GameControl.gameManager.increaseScore(5);
             energyBar.fillAmount += 0.015f; //engel aşılınca enerji artıyor
         }
     }
 
-    private void anaMenuyeDon()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    private void yenidenBasla()
-    {
-        gameOverPanel.SetActive(false);
-        SceneManager.LoadScene(1);
-    }
+    //private void anaMenuyeDon()
+    //{
+    //    SceneManager.LoadScene(0);
+    //}
 
     private void oyunBitti()
+    {
+        ufoExploded();
+
+        energyBar.fillAmount = 0; //enerji barını sıfırla
+        healthBar.fillAmount = 0; //can barini sıfırla
+    }
+
+    private void ufoExploded()
     {
         ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
         Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
         FindObjectOfType<SoundControl>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
         transform.gameObject.SetActive(false);
-        gameOverPanel.SetActive(true);
-        point2Text.text = "Score: " + point;
 
-        if (point > enYuksekPuan) // en yüksek puan için koşul
-        {
-            enYuksekPuan = point;
-            PlayerPrefs.SetInt("enYuksekPuanKayit", enYuksekPuan); // en yüksek puanı kayıtlı tutuyoruz.
-        }
-        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
-
-        energyBar.fillAmount = 0; //enerji barını sıfırla
-        healthBar.fillAmount = 0; //can barini sıfırla
-
-        pauseGameButton.SetActive(false);
-
-        /*Reklam göster*/
-        gameOverTimer = PlayerPrefs.GetInt("oyunBittiSayac");
-        gameOverTimer++;
-        PlayerPrefs.SetInt("oyunBittiSayac", gameOverTimer);
-        Debug.Log(gameOverTimer);
-
-        if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
-        {
-#if UNITY_ANDROID
-            GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<AdControl>().reklamiGoster();
-#endif
-            PlayerPrefs.SetInt("oyunBittiSayac", 0);
-        }
+        GameControl.gameManager.gameOver();
     }
+
+
+
+
 }

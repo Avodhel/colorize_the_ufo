@@ -914,7 +914,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1158392319}
+      - m_Target: {fileID: 519974946}
         m_MethodName: yenidenBasla
         m_Mode: 1
         m_Arguments:
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   - {r: 0.19215687, g: 0.7058824, b: 0.8, a: 1}
   - {r: 0.64705884, g: 0.19215687, b: 0.8, a: 1}
   - {r: 0.85882354, g: 0.4745098, b: 0.078431375, a: 1}
-  pauseGameButton: {fileID: 931593151}
+  pauseGameButton: {fileID: 931593149}
   soundMuteButton: {fileID: 1517436063}
   gamePauseSprite: {fileID: 21300006, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
   gameContinueSprite: {fileID: 21300002, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
@@ -1493,6 +1493,10 @@ MonoBehaviour:
   soundMuteSprite: {fileID: 21300012, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
   changeColorImage: {fileID: 1218486934}
   gamePausedPanel: {fileID: 366599258}
+  gameOverPanel: {fileID: 1111096889}
+  pointText: {fileID: 103328717}
+  point2Text: {fileID: 1632448488}
+  highScoreText: {fileID: 58483231}
 --- !u!1 &540815690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,11 +2400,6 @@ MonoBehaviour:
   - {r: 0.003921569, g: 0.44705886, b: 0.64705884, a: 1}
   - {r: 0.45256317, g: 0.7257568, b: 0.8490566, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  pointText: {fileID: 103328717}
-  point2Text: {fileID: 1632448488}
-  highScoreText: {fileID: 58483231}
-  gameOverPanel: {fileID: 1111096889}
-  pauseGameButton: {fileID: 931593149}
   healthBar: {fileID: 164098203}
   energyBar: {fileID: 1126751171}
   explosionPrefab: {fileID: 1699905320439584, guid: 0000b033031282049ac2a09e0d683a90,
