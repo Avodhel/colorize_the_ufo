@@ -21,6 +21,8 @@ public class GameControl : MonoBehaviour
 
     [Header("Colors")]
     public Color[] colors;
+    public Color[] healthBarColors;
+    public Color[] energyBarColors;
 
     [Header("UI Elements")]
     [SerializeField]
@@ -44,10 +46,9 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     private Text pointText;
     [SerializeField]
-    private Text point2Text;
-    [SerializeField]
     private Text highScoreText;
 
+    private UfoControl ufoControl;
     private GameObject[] obstacles;
     private GameObject obstacleChilds;
 
@@ -55,8 +56,8 @@ public class GameControl : MonoBehaviour
     private float changeObstacleTime = 0f;
     private int timer = 0;
     private int firstPlay;
-    private int point = 0;
-    private int enYuksekPuan = 0;
+    private static int point { get; set; }
+    private static int enYuksekPuan { get; set; }
     private int gameOverCounter = 0;
 
     public static GameControl gameManager { get; private set; } //basic singleton
@@ -65,8 +66,8 @@ public class GameControl : MonoBehaviour
     {
         gameManager = this;
 
-        pointText.text = "Score: " + point;
-        enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
+        resetScore();
+        loadHighscore();
     }
 
     private void Start()
@@ -77,6 +78,7 @@ public class GameControl : MonoBehaviour
         soundControl();
         spawnObstacles();
 
+        ufoControl = GameObject.FindGameObjectWithTag("ufoTag").GetComponent<UfoControl>();
         obstacleChilds = GameObject.Find(obstaclePrefab.transform.name + "(Clone)"); //engel objesini bul
     }
 
@@ -107,7 +109,7 @@ public class GameControl : MonoBehaviour
             changeObstacleTime = 0;
             float xEkseniDegisim = Random.Range(-10f, -2f); // x eksenini random olarak değiştirerek engellerin random bir konumda gelmesini sağlıyoruz.
             obstacles[timer].transform.position = new Vector3(xEkseniDegisim, 7f); // engellerimizin oluşum alanını belirliyoruz.
-                                                                                  /*!!! Vector3 iki tane değer de alabilir.*/
+                                                                                   /*!!! Vector3 iki tane değer de alabilir.*/
             timer++;
             if (timer >= obstacles.Length) // dizideki obje sayısına ulaştığımda
             {
@@ -132,6 +134,12 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    private void resetScore()
+    {
+        point = 0;
+        pointText.text = "Score: " + point;
+    }
+
     public void increaseScore(int value)
     {
         point += value;
@@ -141,10 +149,22 @@ public class GameControl : MonoBehaviour
     public void gameOver()
     {
         gameOverPanel.SetActive(true);
-        point2Text.text = "Score: " + point;
         assignHighscore();
         pauseGameButton.SetActive(false);
+
+        //game ver counter for ad
+        gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
+        gameOverCounter++;
+        PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
+        Debug.Log(gameOverCounter);
+
         showAd();
+    }
+
+    private void loadHighscore()
+    {
+        enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
+        //Debug.Log(enYuksekPuan);
     }
 
     private void assignHighscore()
@@ -227,11 +247,6 @@ public class GameControl : MonoBehaviour
 
     private void showAd()
     {
-        gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
-        gameOverCounter++;
-        PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
-        Debug.Log(gameOverCounter);
-
         if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
         {
 #if UNITY_ANDROID

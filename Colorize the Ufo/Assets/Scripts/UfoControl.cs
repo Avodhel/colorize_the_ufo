@@ -15,15 +15,7 @@ public class UfoControl : MonoBehaviour
     [SerializeField]
     private float minX = -3.1f;
 
-    [Header("Colors")]
-    //[SerializeField]
-    //private Color[] colors;
-    [SerializeField]
-    private Color[] healthBarColor;
-    [SerializeField]
-    private Color[] energyBarColor;
-
-    [Header("UI Objects")]
+    [Header("Bars")]
     [SerializeField]
     private Image healthBar;
     [SerializeField]
@@ -39,6 +31,8 @@ public class UfoControl : MonoBehaviour
     private Vector3 vec3;
     private SpriteRenderer spriteRenderer;
     private Color[] colors;
+    private Color[] healthBarColors;
+    private Color[] energyBarColors;
 
     private float horizontal = 0f;
     private int index = 1;
@@ -47,15 +41,14 @@ public class UfoControl : MonoBehaviour
     private void Awake()
     {
         colors = GameControl.gameManager.colors;
+        healthBarColors = GameControl.gameManager.healthBarColors;
+        energyBarColors = GameControl.gameManager.energyBarColors;
     }
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-
-
         ufoEnginePrefab.SetActive(true); //ufo motoru görünür yap
     }
 
@@ -67,28 +60,34 @@ public class UfoControl : MonoBehaviour
     private void FixedUpdate()
     {
         ufoMovement();
-        healthBarControl();
-        energyBarControl();
+        energyBarAction("reduce", 0.00020f);
     }
 
     private void ufoMovement()
     {
-//#if UNITY_WEBGL
-        horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
-//#elif UNITY_ANDROID
-        horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //mobilde hareket
-                                                                         //#endif
-                                                                         /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
+        userInput();
+
         if (moveControl)
         {
-            vec3 = new Vector3(horizontal * speed, rb2d.velocity.y, 0); // sırasıyla parantez içi: x ekseninde 10 hızında koş | y eksenindeki hızım neyse o olsun |
+            vec3 = new Vector3(horizontal * speed, rb2d.velocity.y, 0);
             rb2d.velocity = vec3;
         }
-  
+
         rb2d.position = new Vector3( // ufonun ekranın dışına çıkmaması için sınır koordinatlarını belirliyoruz.
         Mathf.Clamp(rb2d.position.x, minX, maxX),
         transform.position.y
         );
+    }
+
+    private void userInput()
+    {
+#if UNITY_WEBGL
+        horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
+#elif UNITY_ANDROID
+        horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //mobilde hareket
+                                                                         //#endif
+                                                                         /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
+#endif
     }
 
     private void changeUfosColor()
@@ -116,53 +115,69 @@ public class UfoControl : MonoBehaviour
 #endif
     }
 
-    private void energyBarControl()
+    public void healthBarAction(string con, float value)
     {
-        energyBar.fillAmount -= 0.00020f; //ufo ilerledikçe enerji barı azalıyor
-        if (energyBar.fillAmount == 0) //enerji bari sifirlaninca ufo hareket edemesin.
+        if (con == "increase")
         {
-            moveControl = false;
+            healthBar.fillAmount += value;
         }
+        else if (con == "reduce")
+        {
+            healthBar.fillAmount -= value;
+            if (healthBar.fillAmount <= 0) //can bari sifirlaninca ufo patlasın
+            {
+                ufoExploded();
+            }
+        }
+        barColorize(healthBar, healthBarColors);
 
-        if (energyBar.fillAmount >= 0.65f)
+        if (con == "reset")
         {
-            energyBar.color = energyBarColor[0];
-        }
-        else if (energyBar.fillAmount >= 0.33f)
-        {
-            energyBar.color = energyBarColor[1];
-        }
-        else
-        {
-            energyBar.color = energyBarColor[2];
+            healthBar.fillAmount = 0;
         }
     }
 
-    private void healthBarControl()
+    private void energyBarAction(string con, float value)
     {
-        if (healthBar.fillAmount == 0) //can bari sifirlaninca oyun bitsin
+        if (con == "increase")
         {
-            ufoExploded();
+            energyBar.fillAmount += value;
         }
+        else if (con == "reduce")
+        {
+            energyBar.fillAmount -= value; //ufo ilerledikçe enerji barı azalıyor
+            if (energyBar.fillAmount == 0) //enerji bari sifirlaninca ufo hareket edemesin.
+            {
+                moveControl = false;
+            }
+        }
+        barColorize(energyBar, energyBarColors);
 
-        if (healthBar.fillAmount >= 0.65f)
+        if (con == "reset")
         {
-            healthBar.color = healthBarColor[0];
+            energyBar.fillAmount = 0;
         }
-        else if (healthBar.fillAmount >= 0.33f)
+    }
+
+    private void barColorize(Image bar, Color[] colors)
+    {
+        //colorize bars according to amount
+        if (bar.fillAmount >= 0.65f)
         {
-            healthBar.color = healthBarColor[1];
+            bar.color = colors[0];
+        }
+        else if (bar.fillAmount >= 0.33f)
+        {
+            bar.color = colors[1];
         }
         else
         {
-            healthBar.color = healthBarColor[2];
+            bar.color = colors[2];
         }
     }
 
     private void OnCollisionEnter2D(Collision2D col) // geçirgen olmayan bir yüzeye temas edildiğinde çalışır.
     {
-        //ziplamaKontrol = true; // zıpladıktan sonra karakter yere değdiğinde zıplama tekrar aktif oluyor.
-
         if (col.transform.tag == "engellerTag") // ufo engellere çarptığında
         {
             for (int i = 0; i < col.transform.childCount; i++) //bütün alt nesnelerine bak
@@ -189,13 +204,13 @@ public class UfoControl : MonoBehaviour
                 FindObjectOfType<SoundControl>().sesOynat("Puan"); //puan sesini oynat
                 Destroy(col.gameObject);
                 GameControl.gameManager.increaseScore(1);
-                energyBar.fillAmount += 0.005f; //cisim toplanınca enerji artıyor
+                energyBarAction("increase", 0.005f);
             }
             else
             {
                 FindObjectOfType<SoundControl>().sesOynat("Carpma"); //carpma sesini oynat
                 Destroy(col.gameObject);
-                healthBar.fillAmount -= 0.25f;
+                healthBarAction("reduce", 0.25f);
             }
         }
 
@@ -212,7 +227,7 @@ public class UfoControl : MonoBehaviour
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
-                healthBar.fillAmount += 0.5f;
+                healthBarAction("increase", 0.5f);
             }
             else
             {
@@ -226,7 +241,7 @@ public class UfoControl : MonoBehaviour
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 Destroy(col.gameObject);
-                energyBar.fillAmount += 0.2f;
+                energyBarAction("increase", 0.2f);
                 moveControl = true;
             }
             else
@@ -256,29 +271,19 @@ public class UfoControl : MonoBehaviour
         {
             FindObjectOfType<SoundControl>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
             GameControl.gameManager.increaseScore(5);
-            energyBar.fillAmount += 0.015f; //engel aşılınca enerji artıyor
+            energyBarAction("increase", 0.015f);
         }
     }
 
-    //private void anaMenuyeDon()
-    //{
-    //    SceneManager.LoadScene(0);
-    //}
-
-    private void oyunBitti()
-    {
-        ufoExploded();
-
-        energyBar.fillAmount = 0; //enerji barını sıfırla
-        healthBar.fillAmount = 0; //can barini sıfırla
-    }
-
-    private void ufoExploded()
+    public void ufoExploded()
     {
         ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
         Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
         FindObjectOfType<SoundControl>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
         transform.gameObject.SetActive(false);
+
+        energyBarAction("reset", 0);
+        healthBarAction("reset", 0);
 
         GameControl.gameManager.gameOver();
     }
