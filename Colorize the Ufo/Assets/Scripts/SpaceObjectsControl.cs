@@ -53,13 +53,11 @@ public class SpaceObjectsControl : MonoBehaviour {
         {
             for (int i = 0; i < Random.Range(minFlyingStonesRate, maxFlyingStonesRate); i++)
             {
-                //flyingStone = flyingStones[Random.Range(0, flyingStones.Length)];
-                Vector2 vec = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
-                //Instantiate(flyingStone, vec, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-                GameObject GO = ObjectPooler.SharedInstance.GetPooledObject(Random.Range(0, ObjectPooler.SharedInstance.itemsToPool.Count));
-                GO.SetActive(true);
-                GO.transform.position = vec;
-                GO.GetComponent<ISpaceObject>().objectMovement();
+                Vector2 vec2Pos = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
+                GameObject FS = FlyingStonePooler.SharedInstance.GetPooledObject(Random.Range(0, FlyingStonePooler.SharedInstance.itemsToPool.Count));
+                FS.SetActive(true);
+                FS.transform.position = vec2Pos;
+                FS.GetComponent<ISpaceObject>().objectMovement();
 
                 yield return new WaitForSeconds(spawnFlyingStoneTime);
             }
@@ -69,15 +67,19 @@ public class SpaceObjectsControl : MonoBehaviour {
 
     private IEnumerator spawnRareObjects()
     {
-        yield return new WaitForSeconds(20); //başlangıç bekleme suresi
+        yield return new WaitForSeconds(10); //başlangıç bekleme suresi
 
         while (true)
         {
             for (int i = 0; i < Random.Range(minRareObjectsRate, maxRareObjectsRate); i++)
             {
-                rareObject = rareObjects[Random.Range(0, rareObjects.Length)];
-                Vector2 vec = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
-                Instantiate(rareObject, vec, Quaternion.identity);
+                //rareObject = rareObjects[Random.Range(0, rareObjects.Length)];
+                Vector2 vec2Pos = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
+                GameObject RO = RareObjectPooler.SharedInstance.GetPooledObject(Random.Range(0, RareObjectPooler.SharedInstance.itemsToPool.Count));
+                RO.SetActive(true);
+                RO.transform.position = vec2Pos;
+                RO.GetComponent<ISpaceObject>().objectMovement();
+                //Instantiate(rareObject, vec, Quaternion.identity);
                 yield return new WaitForSeconds(spawnRareObjectTime);
             }
             yield return new WaitForSeconds(spawnRareObjectsGroupTime);

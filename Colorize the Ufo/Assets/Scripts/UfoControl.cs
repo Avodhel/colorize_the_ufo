@@ -218,7 +218,8 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "meteorTag")
         {
-            Destroy(col.gameObject);
+            //Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
             ufoExploded();
         }
 
@@ -228,7 +229,8 @@ public class UfoControl : MonoBehaviour
             if (healthBar.fillAmount < 1) //can full değilse
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
-                Destroy(col.gameObject);
+                //Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 healthBarAction("increase", 0.5f);
             }
             else
@@ -242,7 +244,8 @@ public class UfoControl : MonoBehaviour
             if (energyBar.fillAmount < 1) //enerji full değilse
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
-                Destroy(col.gameObject);
+                //Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 energyBarAction("increase", 0.2f);
                 moveControl = true;
             }
@@ -257,7 +260,8 @@ public class UfoControl : MonoBehaviour
             if (Time.timeScale > 1) //hiz 1'den büyükse
             {
                 FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
-                Destroy(col.gameObject);
+                //Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 Time.timeScale = 1;
             }
             else

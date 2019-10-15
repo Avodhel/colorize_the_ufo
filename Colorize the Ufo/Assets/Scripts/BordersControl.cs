@@ -17,9 +17,9 @@ public class BordersControl : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform.tag == "ucanCisimTag")
-        {
+        //if (col.transform.tag == "ucanCisimTag")
+        //{
             col.gameObject.SetActive(false);
-        }
+        //}
     }
 }
