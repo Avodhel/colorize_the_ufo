@@ -33,7 +33,7 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     private Text highScoreText;
 
-    private UfoControl ufoControl;
+    //private UfoControl ufoControl;
 
     private float gamePausedTimeScale;
     private int firstPlay;
@@ -58,7 +58,7 @@ public class GameControl : MonoBehaviour
         isThisFirstPlay();
         soundControl();
 
-        ufoControl = GameObject.FindGameObjectWithTag("ufoTag").GetComponent<UfoControl>();
+        //ufoControl = GameObject.FindGameObjectWithTag("ufoTag").GetComponent<UfoControl>();
     }
 
     private void resetScore()

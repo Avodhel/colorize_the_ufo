@@ -202,14 +202,16 @@ public class UfoControl : MonoBehaviour
             if (col.transform.GetComponent<SpriteRenderer>().color == transform.GetComponent<SpriteRenderer>().color)
             {
                 FindObjectOfType<SoundControl>().sesOynat("Puan"); //puan sesini oynat
-                Destroy(col.gameObject);
+                //Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 GameControl.gameManager.increaseScore(1);
                 energyBarAction("increase", 0.005f);
             }
             else
             {
                 FindObjectOfType<SoundControl>().sesOynat("Carpma"); //carpma sesini oynat
-                Destroy(col.gameObject);
+                //Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 healthBarAction("reduce", 0.25f);
             }
         }

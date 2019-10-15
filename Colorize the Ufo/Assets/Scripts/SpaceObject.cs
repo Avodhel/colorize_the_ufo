@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpaceObject : MonoBehaviour
+public class SpaceObject : MonoBehaviour, ISpaceObject
 {
     [Header("Object")]
     public float objectSpeed = 2f;
@@ -26,6 +26,7 @@ public class SpaceObject : MonoBehaviour
 
     public void objectMovement()
     {
+        rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = new Vector2(0, -objectSpeed);
     }
 

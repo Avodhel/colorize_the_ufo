@@ -53,16 +53,14 @@ public class SpaceObjectsControl : MonoBehaviour {
         {
             for (int i = 0; i < Random.Range(minFlyingStonesRate, maxFlyingStonesRate); i++)
             {
-                flyingStone = flyingStones[Random.Range(0, flyingStones.Length)];
+                //flyingStone = flyingStones[Random.Range(0, flyingStones.Length)];
                 Vector2 vec = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
-                if (flyingStone.tag == "meteorTag")
-                {
-                    Instantiate(flyingStone, vec, Quaternion.identity);
-                }
-                else
-                {
-                    Instantiate(flyingStone, vec, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-                }
+                //Instantiate(flyingStone, vec, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+                GameObject GO = ObjectPooler.SharedInstance.GetPooledObject(Random.Range(0, ObjectPooler.SharedInstance.itemsToPool.Count));
+                GO.SetActive(true);
+                GO.transform.position = vec;
+                GO.GetComponent<ISpaceObject>().objectMovement();
+
                 yield return new WaitForSeconds(spawnFlyingStoneTime);
             }
             yield return new WaitForSeconds(spawnFlyingStonesGroupTime);
