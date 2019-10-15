@@ -11,7 +11,7 @@ public class BordersControl : MonoBehaviour {
         //    col.transform.tag        != "griEngelTag" &&
         //    col.transform.tag        != "randomEngelTag")
         //{
-        Destroy(col.gameObject);
+        //Destroy(col.gameObject);
         //}
     }
 }
