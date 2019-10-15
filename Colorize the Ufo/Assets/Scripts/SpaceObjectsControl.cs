@@ -36,8 +36,8 @@ public class SpaceObjectsControl : MonoBehaviour {
     [SerializeField]
     private int maxRareObjectsRate = 3;
 
-    GameObject flyingStone;
-    GameObject rareObject;
+    private GameObject flyingStone;
+    private GameObject rareObject;
 
     private void Start ()
     {

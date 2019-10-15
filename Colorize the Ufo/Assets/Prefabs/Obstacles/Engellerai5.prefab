@@ -240,6 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4435685554028890}
+  - component: {fileID: 114508952426887994}
   m_Layer: 0
   m_Name: Engellerai5
   m_TagString: engellerTag
@@ -746,6 +747,17 @@ EdgeCollider2D:
   - {x: -0.3395877, y: -0.34906277}
   - {x: 0.69724107, y: -0.34680825}
   - {x: 0.7185874, y: -0.6748594}
+--- !u!114 &114508952426887994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933314112199810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89db869cba2378d4297bb43ab9682fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212217721319868500
 SpriteRenderer:
   m_ObjectHideFlags: 1

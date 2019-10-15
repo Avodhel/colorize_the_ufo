@@ -104,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4926104411154168}
+  - component: {fileID: 114494933968407452}
   m_Layer: 0
   m_Name: Engellerai3
   m_TagString: engellerTag
@@ -687,6 +688,17 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0017653494, y: 0.0008663113}
   m_Size: {x: 1.5164698, y: 0.4515889}
   m_Direction: 1
+--- !u!114 &114494933968407452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289454605808758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89db869cba2378d4297bb43ab9682fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212140118833587114
 SpriteRenderer:
   m_ObjectHideFlags: 1

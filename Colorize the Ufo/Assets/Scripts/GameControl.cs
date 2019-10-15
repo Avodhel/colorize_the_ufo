@@ -4,21 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
-    [Header("Obstacle")]
-    [SerializeField]
-    [Range(1, 25)]
-    private int obstacleRate = 10;
-    [SerializeField]
-    [Range(0.5f, 3f)]
-    private float obstacleSpeed = 2;
-    [SerializeField]
-    [Range(1f, 20f)]
-    private float obstacleSpawnFrequency = 6;
-    [SerializeField]
-    private GameObject obstaclePrefab;
-    [SerializeField]
-    private GameObject[] obstacleTypes;
-
     [Header("Colors")]
     public Color[] colors;
     public Color[] healthBarColors;
@@ -49,12 +34,8 @@ public class GameControl : MonoBehaviour
     private Text highScoreText;
 
     private UfoControl ufoControl;
-    private GameObject[] obstacles;
-    private GameObject obstacleChilds;
 
     private float gamePausedTimeScale;
-    private float changeObstacleTime = 0f;
-    private int timer = 0;
     private int firstPlay;
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
@@ -76,62 +57,8 @@ public class GameControl : MonoBehaviour
 
         isThisFirstPlay();
         soundControl();
-        spawnObstacles();
 
         ufoControl = GameObject.FindGameObjectWithTag("ufoTag").GetComponent<UfoControl>();
-        obstacleChilds = GameObject.Find(obstaclePrefab.transform.name + "(Clone)"); //engel objesini bul
-    }
-
-    private void Update()
-    {
-        obstaclePosAssign();
-    }
-
-    private void spawnObstacles()
-    {
-        obstacles = new GameObject[obstacleRate]; //kacAdetEngel'e verilen sayı kadar engel objesi
-        for (int i = 0; i < obstacles.Length; i++) // engeller dizisi kadar obje oluştur
-        {
-            obstaclePrefab = obstacleTypes[Random.Range(0, obstacleTypes.Length)]; //birden farklı engel tipi arasından seçim
-            obstacles[i] = Instantiate(obstaclePrefab, new Vector2(-10, -10), Quaternion.identity); // engel objelerinin oluşturulması
-            Rigidbody2D rb2D = obstacles[i].AddComponent<Rigidbody2D>(); //engelimize koddan rigidbody ekledik.
-            rb2D.bodyType = RigidbodyType2D.Kinematic; //!!!dynamic olunca engeller savruluyor
-            rb2D.gravityScale = 0; //oluşan engellerin düşmemesi için 
-            rb2D.velocity = new Vector2(0, -obstacleSpeed); // engellerimizin hareket etmesi için.
-        }
-    }
-
-    private void obstaclePosAssign() // oluşturulan engellerin random pozisyonlarda oluşması için metot
-    {
-        changeObstacleTime += Time.deltaTime;
-        if (changeObstacleTime > obstacleSpawnFrequency) // belirlenen saniyede bir bu koşula girecek ve engelleri oluşturacak.
-        {
-            changeObstacleTime = 0;
-            float xEkseniDegisim = Random.Range(-10f, -2f); // x eksenini random olarak değiştirerek engellerin random bir konumda gelmesini sağlıyoruz.
-            obstacles[timer].transform.position = new Vector3(xEkseniDegisim, 7f); // engellerimizin oluşum alanını belirliyoruz.
-                                                                                   /*!!! Vector3 iki tane değer de alabilir.*/
-            timer++;
-            if (timer >= obstacles.Length) // dizideki obje sayısına ulaştığımda
-            {
-                timer = 0; // sayacı sıfırla
-            }
-
-            if (obstacles[timer].transform.position.y <= -6f) // engel sahneden çıktığında rengini ve triggerını değiştirmek için koşul
-            {
-                for (int a = 0; a < obstacleChilds.transform.childCount; a++)
-                {
-                    if (obstacles[timer].transform.GetChild(a).tag == "randomEngelTag")
-                    {
-                        obstacles[timer].transform.GetChild(a).GetComponent<SpriteRenderer>().color = colors[Random.Range(0, colors.Length)]; //renk degistir
-
-                        if (obstacles[timer].transform.GetChild(a).GetComponent<BoxCollider2D>().isTrigger == true) //istriggeri açıksa 
-                        {
-                            obstacles[timer].transform.GetChild(a).GetComponent<BoxCollider2D>().isTrigger = false; //kapat
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private void resetScore()
