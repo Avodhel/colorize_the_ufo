@@ -13,10 +13,12 @@ public class SpaceObject : MonoBehaviour, ISpaceObject
 
     public void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-        objectMovement();
+    public void OnBecameInvisible() //screen exited
+    {
+        gameObject.SetActive(false);
     }
 
     public void Update()

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RareObjectPooler : ObjectPooler {
+public class ObstaclePooler : ObjectPooler {
 
-    public static RareObjectPooler SharedInstance { get; private set; }
+    public static ObstaclePooler SharedInstance { get; private set; }
 
     public override void Awake()
     {

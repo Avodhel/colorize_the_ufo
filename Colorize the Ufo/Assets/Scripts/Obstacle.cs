@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 
-public class Obstacle : MonoBehaviour {
+public class Obstacle : MonoBehaviour, IObstacle
+{
+    private Rigidbody2D rb2d;
 
-    //private Color[] colors;
+    private Color[] colors;
 
-    //private void Awake()
-    //{
-    //    colors = GameControl.gameManager.colors;
-    //}
+    public void OnBecameInvisible() //screen exited
+    {
+        gameObject.SetActive(false);
+    }
 
-    //private void obstacleManager()
-    //{
-    //    if (transform.position.y <= -6f) // engel sahneden çıktığında rengini ve triggerını değiştirmek için koşul
-    //    {
-    //        for (int a = 0; a < transform.childCount; a++)
-    //        {
-    //            if (transform.GetChild(a).tag == "randomEngelTag")
-    //            {
-    //                transform.GetChild(a).GetComponent<SpriteRenderer>().color = colors[Random.Range(0, colors.Length)]; //renk degistir
+    public void obstacleMovement()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        rb2d.velocity = new Vector2(0, -2); // engellerimizin hareket etmesi için.
+    }
 
-    //                if (transform.GetChild(a).GetComponent<BoxCollider2D>().isTrigger == true) //istriggeri açıksa 
-    //                {
-    //                    transform.GetChild(a).GetComponent<BoxCollider2D>().isTrigger = false; //kapat
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    public void changeColor()
+    {
+        colors = GameControl.gameManager.colors;
+        for (int a = 0; a < transform.childCount; a++)
+        {
+            if (transform.GetChild(a).tag == "randomEngelTag")
+            {
+                transform.GetChild(a).GetComponent<SpriteRenderer>().color = colors[Random.Range(0, colors.Length)]; //renk degistir
+            }
+        }
+    }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class SpaceObjectsControl : MonoBehaviour {
 
-    [Header("Flying Stones")]
-    [SerializeField]
-    private GameObject[] flyingStones;
-    [Header("Rare Objects")]
-    [SerializeField]
-    private GameObject[] rareObjects;
+    //[Header("Flying Stones")]
+    //[SerializeField]
+    //private GameObject[] flyingStones;
+    //[Header("Rare Objects")]
+    //[SerializeField]
+    //private GameObject[] rareObjects;
 
     [Header("Spawn Objects")]
     [SerializeField]
@@ -36,8 +36,8 @@ public class SpaceObjectsControl : MonoBehaviour {
     [SerializeField]
     private int maxRareObjectsRate = 3;
 
-    private GameObject flyingStone;
-    private GameObject rareObject;
+    //private GameObject flyingStone;
+    //private GameObject rareObject;
 
     private void Start ()
     {
@@ -73,13 +73,12 @@ public class SpaceObjectsControl : MonoBehaviour {
         {
             for (int i = 0; i < Random.Range(minRareObjectsRate, maxRareObjectsRate); i++)
             {
-                //rareObject = rareObjects[Random.Range(0, rareObjects.Length)];
                 Vector2 vec2Pos = new Vector2(Random.Range(-randomPos.x, randomPos.x), randomPos.y);
                 GameObject RO = RareObjectPooler.SharedInstance.GetPooledObject(Random.Range(0, RareObjectPooler.SharedInstance.itemsToPool.Count));
                 RO.SetActive(true);
                 RO.transform.position = vec2Pos;
                 RO.GetComponent<ISpaceObject>().objectMovement();
-                //Instantiate(rareObject, vec, Quaternion.identity);
+
                 yield return new WaitForSeconds(spawnRareObjectTime);
             }
             yield return new WaitForSeconds(spawnRareObjectsGroupTime);

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ISpaceObject
+﻿public interface ISpaceObject
 {
     void objectMovement();
 }
