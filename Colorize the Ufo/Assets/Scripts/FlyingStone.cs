@@ -4,11 +4,6 @@ public class FlyingStone : SpaceObject {
 
     private Color[] colors;
 
-    //private void Awake()
-    //{
-        
-    //}
-
     private new void Start()
     {
         base.Start();
@@ -47,12 +42,7 @@ public class FlyingStone : SpaceObject {
             col.transform.tag == "enerjiVerenCisimTag" ||
             col.transform.tag == "yavaslatanCisimTag")
         {
-            //Destroy(transform.gameObject);
             transform.gameObject.SetActive(false);
         }
-        //else
-        //{
-        //    Debug.Log(col.transform.tag);
-        //}
     }
 }

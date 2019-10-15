@@ -33,8 +33,6 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     private Text highScoreText;
 
-    //private UfoControl ufoControl;
-
     private float gamePausedTimeScale;
     private int firstPlay;
     private static int point { get; set; }
@@ -57,8 +55,6 @@ public class GameControl : MonoBehaviour
 
         isThisFirstPlay();
         soundControl();
-
-        //ufoControl = GameObject.FindGameObjectWithTag("ufoTag").GetComponent<UfoControl>();
     }
 
     private void resetScore()
@@ -83,7 +79,6 @@ public class GameControl : MonoBehaviour
         gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
         gameOverCounter++;
         PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
-        Debug.Log(gameOverCounter);
 
         showAd();
     }
@@ -91,7 +86,6 @@ public class GameControl : MonoBehaviour
     private void loadHighscore()
     {
         enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
-        //Debug.Log(enYuksekPuan);
     }
 
     private void assignHighscore()

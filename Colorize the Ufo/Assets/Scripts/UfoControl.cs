@@ -202,7 +202,6 @@ public class UfoControl : MonoBehaviour
             if (col.transform.GetComponent<SpriteRenderer>().color == transform.GetComponent<SpriteRenderer>().color)
             {
                 FindObjectOfType<SoundControl>().sesOynat("Puan"); //puan sesini oynat
-                //Destroy(col.gameObject);
                 col.gameObject.SetActive(false);
                 GameControl.gameManager.increaseScore(1);
                 energyBarAction("increase", 0.005f);
@@ -210,7 +209,6 @@ public class UfoControl : MonoBehaviour
             else
             {
                 FindObjectOfType<SoundControl>().sesOynat("Carpma"); //carpma sesini oynat
-                //Destroy(col.gameObject);
                 col.gameObject.SetActive(false);
                 healthBarAction("reduce", 0.25f);
             }
@@ -218,7 +216,6 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "meteorTag")
         {
-            //Destroy(col.gameObject);
             col.gameObject.SetActive(false);
             ufoExploded();
         }
@@ -229,7 +226,6 @@ public class UfoControl : MonoBehaviour
             if (healthBar.fillAmount < 1) //can full değilse
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
-                //Destroy(col.gameObject);
                 col.gameObject.SetActive(false);
                 healthBarAction("increase", 0.5f);
             }
@@ -244,7 +240,6 @@ public class UfoControl : MonoBehaviour
             if (energyBar.fillAmount < 1) //enerji full değilse
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
-                //Destroy(col.gameObject);
                 col.gameObject.SetActive(false);
                 energyBarAction("increase", 0.2f);
                 moveControl = true;
@@ -260,7 +255,6 @@ public class UfoControl : MonoBehaviour
             if (Time.timeScale > 1) //hiz 1'den büyükse
             {
                 FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
-                //Destroy(col.gameObject);
                 col.gameObject.SetActive(false);
                 Time.timeScale = 1;
             }
@@ -293,8 +287,4 @@ public class UfoControl : MonoBehaviour
 
         GameControl.gameManager.gameOver();
     }
-
-
-
-
 }

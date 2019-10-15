@@ -401,25 +401,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 61434517233897978, guid: 0e1141789030ec843b69b5a0e436989e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61635241356572414, guid: 0e1141789030ec843b69b5a0e436989e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1697935170669328, guid: 0e1141789030ec843b69b5a0e436989e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114177654989462814, guid: 0e1141789030ec843b69b5a0e436989e,
-        type: 2}
-      propertyPath: splitSpeed
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 1697935170669328, guid: 0e1141789030ec843b69b5a0e436989e, type: 2}
       propertyPath: m_Name
       value: Background

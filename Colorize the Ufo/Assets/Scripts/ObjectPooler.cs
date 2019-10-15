@@ -19,7 +19,6 @@ public class ObjectPoolItem
 
 public class ObjectPooler : MonoBehaviour
 {
-    //public static ObjectPooler SharedInstance { get; set; }
     public List<ObjectPoolItem> itemsToPool;
 
     public List<List<GameObject>> pooledObjectsList;
@@ -28,9 +27,6 @@ public class ObjectPooler : MonoBehaviour
 
     public virtual void Awake()
     {
-
-        //SharedInstance = this;
-
         pooledObjectsList = new List<List<GameObject>>();
         pooledObjects = new List<GameObject>();
         positions = new List<int>();
@@ -40,9 +36,7 @@ public class ObjectPooler : MonoBehaviour
         {
             ObjectPoolItemToPooledObject(i);
         }
-
     }
-
 
     public GameObject GetPooledObject(int index)
     {

@@ -3,13 +3,6 @@ using UnityEngine;
 
 public class SpaceObjectsControl : MonoBehaviour {
 
-    //[Header("Flying Stones")]
-    //[SerializeField]
-    //private GameObject[] flyingStones;
-    //[Header("Rare Objects")]
-    //[SerializeField]
-    //private GameObject[] rareObjects;
-
     [Header("Spawn Objects")]
     [SerializeField]
     private float startSpawnTime = 2f;
@@ -35,9 +28,6 @@ public class SpaceObjectsControl : MonoBehaviour {
     private int minRareObjectsRate = 0;
     [SerializeField]
     private int maxRareObjectsRate = 3;
-
-    //private GameObject flyingStone;
-    //private GameObject rareObject;
 
     private void Start ()
     {
