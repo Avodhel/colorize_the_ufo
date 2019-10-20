@@ -53,7 +53,6 @@ public class GameControl : MonoBehaviour
     {
         //PlayerPrefs.DeleteAll();
 
-        isThisFirstPlay();
         soundControl();
     }
 
@@ -152,17 +151,6 @@ public class GameControl : MonoBehaviour
         {
             soundMuteButton.GetComponent<Image>().sprite = soundMuteSprite;
             AudioListener.volume = 0f; //sesi kapat
-        }
-    }
-
-    private void isThisFirstPlay() //oyun ilk kez oynanıyorsa tutorial gözükmesi için fonksiyon
-    {
-        firstPlay = PlayerPrefs.GetInt("ilkKezMiOynaniyor");
-
-        if (firstPlay <= 2)
-        {
-            firstPlay = firstPlay + 1;
-            PlayerPrefs.SetInt("ilkKezMiOynaniyor", firstPlay);
         }
     }
 
