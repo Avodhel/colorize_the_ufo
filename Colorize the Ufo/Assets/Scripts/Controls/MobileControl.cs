@@ -3,14 +3,49 @@ using UnityEngine.UI;
 
 public class MobileControl : MonoBehaviour {
 #if UNITY_ANDROID
-    public Image leftImage;
-    public Text leftText;
-    public Image rightImage;
-    public Text rightText;
-    public Image changeColorImage;
-    public Text changeColorText;
 
-	void Start ()
+    private Image leftImage;
+    private Text leftText;
+    private Image rightImage;
+    private Text rightText;
+    private Image changeColorImage;
+    private Text changeColorText;
+
+    public static MobileControl mobileControlManager { get; private set; }
+
+    private void Awake()
+    {
+        mobileControlManager = this;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).name == "Left")
+            {
+                Transform left = transform.GetChild(i);
+                leftImage = left.GetComponent<Image>();
+                leftText = left.GetChild(0).GetComponent<Text>();
+            }
+            if (transform.GetChild(i).name == "Right")
+            {
+                Transform right = transform.GetChild(i);
+                rightImage = right.GetComponent<Image>();
+                rightText = right.GetChild(0).GetComponent<Text>();
+            }
+            if (transform.GetChild(i).name == "ChangeColor")
+            {
+                Transform changeColor = transform.GetChild(i);
+                changeColorImage = changeColor.GetComponent<Image>();
+                changeColorText = changeColor.GetChild(0).GetComponent<Text>();
+            }
+        }
+    }
+
+    private void Start ()
+    {
+        makeVisible();
+    }
+
+    private void makeVisible()
     {
         leftImage.color = new Color(leftImage.color.r, leftImage.color.g, leftImage.color.b, 1f);
         rightImage.color = new Color(rightImage.color.r, rightImage.color.g, rightImage.color.b, 1f);
@@ -20,26 +55,24 @@ public class MobileControl : MonoBehaviour {
         rightText.enabled = true;
         changeColorText.enabled = true;
     }
-	
-    public void OnMouseDown()
+
+    public void leftClicked()
     {
-        if (gameObject.name == "Left")
-        {
-            leftImage.color = new Color(leftImage.color.r, leftImage.color.g, leftImage.color.b, 0f);
-            leftText.enabled = false;
-        }
-
-        if (gameObject.name == "Right")
-        {
-            rightImage.color = new Color(rightImage.color.r, rightImage.color.g, rightImage.color.b, 0f);
-            rightText.enabled = false;
-        }
-
-        if (gameObject.name == "ChangeColor")
-        {
-            changeColorImage.color = new Color(changeColorImage.color.r, changeColorImage.color.g, changeColorImage.color.b, 0f);
-            changeColorText.enabled = false;
-        }
+        leftImage.color = new Color(leftImage.color.r, leftImage.color.g, leftImage.color.b, 0f);
+        leftText.enabled = false;
     }
+
+    public void rightClicked()
+    {
+        rightImage.color = new Color(rightImage.color.r, rightImage.color.g, rightImage.color.b, 0f);
+        rightText.enabled = false;
+    }
+
+    public void changeColorClicked()
+    {
+        changeColorImage.color = new Color(changeColorImage.color.r, changeColorImage.color.g, changeColorImage.color.b, 0f);
+        changeColorText.enabled = false;
+    }
+
 #endif
 }

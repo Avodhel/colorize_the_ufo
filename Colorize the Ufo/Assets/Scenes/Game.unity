@@ -852,6 +852,36 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114189542155939032, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1389259350}
+    - target: {fileID: 114969535131608134, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1389259350}
+    - target: {fileID: 114882022738261356, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1389259350}
+    - target: {fileID: 114969535131608134, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: leftClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189542155939032, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: rightClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 114882022738261356, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: changeColorClicked
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
   m_IsPrefabAsset: 0
@@ -2620,6 +2650,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1389259350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114774844455166490, guid: 5eec0ea258e4ad9438a5b66f566eaddd,
+    type: 2}
+  m_PrefabInternal: {fileID: 274940041}
+  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
 --- !u!1 &1517436061
 GameObject:
   m_ObjectHideFlags: 0
