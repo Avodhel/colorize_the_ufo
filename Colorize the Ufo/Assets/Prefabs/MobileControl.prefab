@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114695169814215114}
   - component: {fileID: 114234069043911130}
   - component: {fileID: 114882022738261356}
-  - component: {fileID: 114953561384417766}
+  - component: {fileID: 114366061968445484}
   m_Layer: 5
   m_Name: ChangeColor
   m_TagString: Untagged
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 114342731301190894}
   - component: {fileID: 114319864242152482}
   - component: {fileID: 114969535131608134}
-  - component: {fileID: 114839231118614326}
+  - component: {fileID: 114483568744860086}
   m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 114042721219854498}
   - component: {fileID: 114505900567043968}
   - component: {fileID: 114189542155939032}
-  - component: {fileID: 114817407992338238}
+  - component: {fileID: 114665682114838102}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114817407992338238}
+      - m_Target: {fileID: 114665682114838102}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -485,6 +485,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114366061968445484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096011248087656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftImage: {fileID: 114235215949402136}
+  leftText: {fileID: 114030298628877586}
+  rightImage: {fileID: 114362049407501922}
+  rightText: {fileID: 114772081298723184}
+  changeColorImage: {fileID: 114693697929139560}
+  changeColorText: {fileID: 114691269914393158}
 --- !u!114 &114391610544107758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -496,6 +513,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71398ce7fbc3a5b4fa50b50bd54317a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114483568744860086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323495263321498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftImage: {fileID: 114235215949402136}
+  leftText: {fileID: 114030298628877586}
+  rightImage: {fileID: 114362049407501922}
+  rightText: {fileID: 114772081298723184}
+  changeColorImage: {fileID: 114693697929139560}
+  changeColorText: {fileID: 114691269914393158}
 --- !u!114 &114505900567043968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,6 +542,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Horizontal
+--- !u!114 &114665682114838102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360222733899564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftImage: {fileID: 114235215949402136}
+  leftText: {fileID: 114030298628877586}
+  rightImage: {fileID: 114362049407501922}
+  rightText: {fileID: 114772081298723184}
+  changeColorImage: {fileID: 114693697929139560}
+  changeColorText: {fileID: 114691269914393158}
 --- !u!114 &114691269914393158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -682,17 +733,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Tap to Move Right
---- !u!114 &114817407992338238
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1360222733899564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114833231661682292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -714,17 +754,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114839231118614326
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1323495263321498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114882022738261356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -764,7 +793,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114953561384417766}
+      - m_Target: {fileID: 114366061968445484}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -777,17 +806,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114953561384417766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096011248087656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85423b06a3738bf4f9726a6f1af4bc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114969535131608134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -827,7 +845,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114839231118614326}
+      - m_Target: {fileID: 114483568744860086}
         m_MethodName: OnMouseDown
         m_Mode: 1
         m_Arguments:
@@ -1013,7 +1031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.78, y: 0.01}
   m_AnchorMax: {x: 0.99, y: 0.15}
-  m_AnchoredPosition: {x: -231, y: -22}
+  m_AnchoredPosition: {x: -231, y: -21.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224928433394343122
