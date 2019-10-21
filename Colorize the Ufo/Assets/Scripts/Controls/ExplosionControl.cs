@@ -2,9 +2,10 @@
 
 public class ExplosionControl : MonoBehaviour {
 
-    private SpriteRenderer spriteRenderer;
-
+    [Header("Animator")]
     public Animator anim;
+
+    private SpriteRenderer spriteRenderer;
 
     private void Start ()
     {
