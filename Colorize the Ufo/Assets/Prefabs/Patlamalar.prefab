@@ -19,8 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4195800431631042}
-  - component: {fileID: 114193310507753820}
+  - component: {fileID: 114715765421398532}
   - component: {fileID: 212922682319519554}
+  - component: {fileID: 95140419761433998}
   m_Layer: 0
   m_Name: Patlamalar
   m_TagString: patlamalarTag
@@ -41,7 +42,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114193310507753820
+--- !u!95 &95140419761433998
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699905320439584}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d3c71ce205c9b3438c99cc0dfc00177, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114715765421398532
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,11 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a1af3607ec7cb40afce88e2f645399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionEffectSprites:
-  - {fileID: 21300000, guid: 855a1c59a5c520a4ebb2fc146536e357, type: 3}
-  - {fileID: 21300000, guid: 35cfa92ecf9b32147b5202a242545d3a, type: 3}
-  - {fileID: 21300000, guid: ef844f4fa2221ea4d8a2e1fd278b7078, type: 3}
-  - {fileID: 0}
+  anim: {fileID: 95140419761433998}
 --- !u!212 &212922682319519554
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -97,7 +112,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.47, y: 0.42}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

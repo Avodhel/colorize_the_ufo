@@ -882,6 +882,18 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: changeColorClicked
       objectReference: {fileID: 0}
+    - target: {fileID: 1323495263321498, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096011248087656, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360222733899564, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eec0ea258e4ad9438a5b66f566eaddd, type: 2}
   m_IsPrefabAsset: 0
@@ -1278,6 +1290,10 @@ Prefab:
       propertyPath: ufo
       value: 
       objectReference: {fileID: 1616721723}
+    - target: {fileID: 1153714111999796, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ad9ae415842deb40b0365c5644d05ff, type: 2}
   m_IsPrefabAsset: 0
@@ -3121,6 +3137,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1153714111999796, guid: 9ad9ae415842deb40b0365c5644d05ff,
     type: 2}
   m_PrefabInternal: {fileID: 431569138}
+--- !u!95 &1895383733
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1895383732}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b4d2d0b5e97fb540baa3399f96bece1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2091745074
 GameObject:
   m_ObjectHideFlags: 0
