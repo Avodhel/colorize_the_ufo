@@ -115,6 +115,11 @@ public class GameControl : MonoBehaviour
         highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
     }
 
+    public void goToMainMenu()
+    {
+        SceneControl.sceneManager.loadScene(0);
+    }
+
     public void yenidenBasla()
     {
         gameOverPanel.SetActive(false);
