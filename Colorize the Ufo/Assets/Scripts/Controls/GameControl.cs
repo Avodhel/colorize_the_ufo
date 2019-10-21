@@ -62,7 +62,7 @@ public class GameControl : MonoBehaviour
         point = 0;
         pointText.text = "Score: " + point;
 
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         speedText.text = "Speed: " + Time.timeScale;
     }
 
@@ -83,7 +83,7 @@ public class GameControl : MonoBehaviour
             Time.timeScale -= value;
         }
 
-        speedText.text = "Speed: " + Time.timeScale;
+        speedText.text = "Speed: " + System.Math.Round(Time.timeScale, 2);
     }
 
     public void gameOver()
