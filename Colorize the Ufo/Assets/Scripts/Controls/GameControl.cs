@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -119,7 +118,7 @@ public class GameControl : MonoBehaviour
     public void yenidenBasla()
     {
         gameOverPanel.SetActive(false);
-        SceneManager.LoadScene(1);
+        SceneControl.sceneManager.loadScene(1);
     }
 
     public void oyunuDurdurveDevamEt() //oyunu durdur butonuna basıldığında

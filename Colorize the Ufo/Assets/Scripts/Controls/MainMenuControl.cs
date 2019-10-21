@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuControl : MonoBehaviour {
 
     public void oyunaBasla()
     {
-        SceneManager.LoadScene(1);
+        SceneControl.sceneManager.loadScene(1);
     }
 
     public void oyundanCik()
