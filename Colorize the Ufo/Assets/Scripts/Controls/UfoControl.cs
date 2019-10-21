@@ -256,7 +256,10 @@ public class UfoControl : MonoBehaviour
             {
                 FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
                 col.gameObject.SetActive(false);
-                Time.timeScale = 1;
+                if (Time.timeScale > 1f)
+                {
+                    GameControl.gameManager.gameSpeed("reduce", 0.1f);
+                }
             }
             else
             {

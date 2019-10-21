@@ -31,6 +31,8 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     private Text pointText;
     [SerializeField]
+    private Text speedText;
+    [SerializeField]
     private Text highScoreText;
 
     private float gamePausedTimeScale;
@@ -45,7 +47,7 @@ public class GameControl : MonoBehaviour
     {
         gameManager = this;
 
-        resetScore();
+        resetScoreAndSpeed();
         loadHighscore();
     }
 
@@ -56,16 +58,33 @@ public class GameControl : MonoBehaviour
         soundControl();
     }
 
-    private void resetScore()
+    private void resetScoreAndSpeed()
     {
         point = 0;
         pointText.text = "Score: " + point;
+
+        Time.timeScale = 1;
+        speedText.text = "Speed: " + Time.timeScale;
     }
 
     public void increaseScore(int value)
     {
         point += value;
         pointText.text = "Score: " + point;
+    }
+
+    public void gameSpeed(string state, float value)
+    {
+        if (state == "increase")
+        {
+            Time.timeScale += value;
+        }
+        else if(state == "reduce")
+        {
+            Time.timeScale -= value;
+        }
+
+        speedText.text = "Speed: " + Time.timeScale;
     }
 
     public void gameOver()
