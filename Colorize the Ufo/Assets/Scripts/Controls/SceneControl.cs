@@ -1,7 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneControl : MonoBehaviour {
+
+    public Animator transitionAnim;
+    public GameObject panel;
+
 
     public static SceneControl sceneManager { get; private set; }
 
@@ -19,7 +25,13 @@ public class SceneControl : MonoBehaviour {
 
     public void loadScene(int scene)
     {
-        SceneManager.LoadScene(scene);
+        StartCoroutine(transitionBetweenScenes(scene));
     }
 
+    private IEnumerator transitionBetweenScenes(int scene)
+    {
+        transitionAnim.SetTrigger("transition");
+        yield return new WaitUntil(()=>panel.GetComponent<Image>().color.a == 1);
+        SceneManager.LoadScene(scene);
+    }
 }
