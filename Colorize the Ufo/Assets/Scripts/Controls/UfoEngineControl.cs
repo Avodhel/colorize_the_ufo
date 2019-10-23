@@ -8,12 +8,12 @@ public class UfoEngineControl : MonoBehaviour {
     [Header("Animator")]
     public Animator anim;
 
-    private SpriteRenderer spriteRenderer;
+    //private SpriteRenderer spriteRenderer;
 
-    private void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    //private void Start()
+    //{
+    //    spriteRenderer = GetComponent<SpriteRenderer>();
+    //}
 
     private void LateUpdate()
     {

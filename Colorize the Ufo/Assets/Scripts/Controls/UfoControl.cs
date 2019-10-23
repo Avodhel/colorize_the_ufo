@@ -252,14 +252,14 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "yavaslatanCisimTag")
         {
-            if (Time.timeScale > 1) //hiz 1'den büyükse
+            if (Time.timeScale > 0.1f) //hiz 0.1'den büyükse
             {
                 FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
                 col.gameObject.SetActive(false);
-                if (Time.timeScale > 0.1f)
-                {
-                    GameControl.gameManager.gameSpeed("reduce", 0.1f);
-                }
+                //if (Time.timeScale > 0.1f)
+                //{
+                GameControl.gameManager.gameSpeed("reduce", 0.1f);
+                //}
             }
             else
             {

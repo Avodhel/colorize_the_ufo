@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SceneControl : MonoBehaviour {
 
     public Animator transitionAnim;
-    public GameObject panel;
+    public GameObject transitionPanel;
 
 
     public static SceneControl sceneManager { get; private set; }
@@ -31,7 +31,7 @@ public class SceneControl : MonoBehaviour {
     private IEnumerator transitionBetweenScenes(int scene)
     {
         transitionAnim.SetTrigger("transition");
-        yield return new WaitUntil(()=>panel.GetComponent<Image>().color.a == 1);
+        yield return new WaitUntil(()=>transitionPanel.GetComponent<Image>().color.a == 1);
         SceneManager.LoadScene(scene);
     }
 }

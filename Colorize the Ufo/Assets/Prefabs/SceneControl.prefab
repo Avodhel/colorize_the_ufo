@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnim: {fileID: 95411133268230568}
-  panel: {fileID: 1911967034791952}
+  transitionPanel: {fileID: 1911967034791952}
 --- !u!114 &114731458311419826
 MonoBehaviour:
   m_ObjectHideFlags: 1

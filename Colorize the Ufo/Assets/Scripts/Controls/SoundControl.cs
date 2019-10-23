@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class SoundControl : MonoBehaviour {
 
@@ -18,6 +19,11 @@ public class SoundControl : MonoBehaviour {
         }
 	}
 
+    private void Start()
+    {
+        soundControl();
+    }
+
     public void sesOynat(string sesAdi) //bu metot ile ismine göre seslerimizi istediğimiz yerde oynatacağız.
     {
         SoundsList s =  Array.Find(sesler, ses => ses.sesAdi == sesAdi);
@@ -27,5 +33,35 @@ public class SoundControl : MonoBehaviour {
             return;
         }
         s.source.Play();
+    }
+
+    public void soundsMuteAndUnmute()
+    {
+        if (PlayerPrefs.GetInt("sesAcikMiKapaliMi") == 0) //ses açıksa
+        {
+            UIControl.UIManager.soundMuteButton.GetComponent<Image>().sprite = UIControl.UIManager.soundMuteSprite;
+            AudioListener.volume = 0f; //sesi kapat
+            PlayerPrefs.SetInt("sesAcikMiKapaliMi", 1);
+        }
+        else if (PlayerPrefs.GetInt("sesAcikMiKapaliMi") == 1) //ses kapalıysa
+        {
+            UIControl.UIManager.soundMuteButton.GetComponent<Image>().sprite = UIControl.UIManager.soundUnmuteSprite;
+            AudioListener.volume = 1f; //sesi ac
+            PlayerPrefs.SetInt("sesAcikMiKapaliMi", 0);
+        }
+    }
+
+    private void soundControl() //restart sonrası ses acik veya kapali sprite sorununu çözen fonksiyon
+    {
+        if ((PlayerPrefs.GetInt("sesAcikMiKapaliMi")) == 0)
+        {
+            UIControl.UIManager.soundMuteButton.GetComponent<Image>().sprite = UIControl.UIManager.soundUnmuteSprite;
+            AudioListener.volume = 1f; //sesi ac
+        }
+        else if ((PlayerPrefs.GetInt("sesAcikMiKapaliMi")) == 1)
+        {
+            UIControl.UIManager.soundMuteButton.GetComponent<Image>().sprite = UIControl.UIManager.soundMuteSprite;
+            AudioListener.volume = 0f; //sesi kapat
+        }
     }
 }

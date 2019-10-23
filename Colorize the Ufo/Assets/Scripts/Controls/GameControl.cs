@@ -8,34 +8,7 @@ public class GameControl : MonoBehaviour
     public Color[] healthBarColors;
     public Color[] energyBarColors;
 
-    [Header("UI Elements")]
-    [SerializeField]
-    private GameObject pauseGameButton;
-    [SerializeField]
-    private Button soundMuteButton;
-    [SerializeField]
-    private Sprite gamePauseSprite;
-    [SerializeField]
-    private Sprite gameContinueSprite;
-    [SerializeField]
-    private Sprite soundUnmuteSprite;
-    [SerializeField]
-    private Sprite soundMuteSprite;
-    [SerializeField]
-    private Image changeColorImage;
-    [SerializeField]
-    private GameObject gamePausedPanel;
-    [SerializeField]
-    private GameObject gameOverPanel;
-    [SerializeField]
-    private Text pointText;
-    [SerializeField]
-    private Text speedText;
-    [SerializeField]
-    private Text highScoreText;
-
-    private float gamePausedTimeScale;
-    private int firstPlay;
+    private float gamePausedTimeScale { get; set; }
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
     private int gameOverCounter = 0;
@@ -44,7 +17,14 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = this;
+        if (gameManager == null)
+        {
+            gameManager = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         resetScoreAndSpeed();
         loadHighscore();
@@ -53,51 +33,21 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
         //PlayerPrefs.DeleteAll();
-
-        soundControl();
     }
 
     private void resetScoreAndSpeed()
     {
         point = 0;
-        pointText.text = "Score: " + point;
+        UIControl.UIManager.pointText.text = "Score: " + point;
 
         Time.timeScale = 1f;
-        speedText.text = "Speed: " + Time.timeScale;
+        UIControl.UIManager.speedText.text = "Speed: " + Time.timeScale;
     }
 
     public void increaseScore(int value)
     {
         point += value;
-        pointText.text = "Score: " + point;
-    }
-
-    public void gameSpeed(string state, float value)
-    {
-        if (state == "increase")
-        {
-            Time.timeScale += value;
-        }
-        else if(state == "reduce")
-        {
-            Time.timeScale -= value;
-        }
-
-        speedText.text = "Speed: " + System.Math.Round(Time.timeScale, 2);
-    }
-
-    public void gameOver()
-    {
-        gameOverPanel.SetActive(true);
-        assignHighscore();
-        pauseGameButton.SetActive(false);
-
-        //game ver counter for ad
-        gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
-        gameOverCounter++;
-        PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
-
-        showAd();
+        UIControl.UIManager.pointText.text = "Score: " + point;
     }
 
     private void loadHighscore()
@@ -112,69 +62,35 @@ public class GameControl : MonoBehaviour
             enYuksekPuan = point;
             PlayerPrefs.SetInt("enYuksekPuanKayit", enYuksekPuan); // en yüksek puanı kayıtlı tutuyoruz.
         }
-        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
+        UIControl.UIManager.highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
     }
 
-    public void goToMainMenu()
+    public void gameSpeed(string state, float value)
     {
-        SceneControl.sceneManager.loadScene(0);
+        if (state == "increase")
+        {
+            Time.timeScale += value;
+        }
+        else if(state == "reduce")
+        {
+            Time.timeScale -= value;
+        }
+
+        UIControl.UIManager.speedText.text = "Speed: " + System.Math.Round(Time.timeScale, 2);
     }
 
-    public void yenidenBasla()
+    public void gameOver()
     {
-        gameOverPanel.SetActive(false);
-        SceneControl.sceneManager.loadScene(1);
-    }
+        UIControl.UIManager.gameOverPanel.SetActive(true);
+        assignHighscore();
+        UIControl.UIManager.pauseGameButton.SetActive(false);
 
-    public void oyunuDurdurveDevamEt() //oyunu durdur butonuna basıldığında
-    {
-        if (Time.timeScale >= 1) //oyun devam ediyorsa
-        {
-            gamePausedTimeScale = Time.timeScale; //kalınan hız bilgisini al
-            Time.timeScale = 0; // oyunu durdur
-            pauseGameButton.GetComponent<Image>().sprite = gameContinueSprite;
-            gamePausedPanel.SetActive(true);
-            AudioListener.pause = true; //sesleri kapat
-            changeColorImage.enabled = false; // oyun durduğunda ufonun rengi değiştirilemesin
-        }
-        else if (Time.timeScale == 0) // oyun durmuşsa
-        {
-            Time.timeScale = gamePausedTimeScale; //oyuna kalınan hızdan devam et
-            pauseGameButton.GetComponent<Image>().sprite = gamePauseSprite;
-            gamePausedPanel.SetActive(false);
-            AudioListener.pause = false;//sesi tekrar ac
-            changeColorImage.enabled = true; // ufo rengi değiştirmeyi tekrar aktif et
-        }
-    }
+        //game ver counter for ad
+        gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
+        gameOverCounter++;
+        PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
 
-    public void sesleriKapatveAc()
-    {
-        if (PlayerPrefs.GetInt("sesAcikMiKapaliMi") == 0) //ses açıksa
-        {
-            soundMuteButton.GetComponent<Image>().sprite = soundMuteSprite;
-            AudioListener.volume = 0f; //sesi kapat
-            PlayerPrefs.SetInt("sesAcikMiKapaliMi", 1);
-        }
-        else if (PlayerPrefs.GetInt("sesAcikMiKapaliMi") == 1) //ses kapalıysa
-        {
-            soundMuteButton.GetComponent<Image>().sprite = soundUnmuteSprite;
-            AudioListener.volume = 1f; //sesi ac
-            PlayerPrefs.SetInt("sesAcikMiKapaliMi", 0);
-        }
-    }
-
-    private void soundControl() //restart sonrası ses acik veya kapali sprite sorununu çözen fonksiyon
-    {
-        if ((PlayerPrefs.GetInt("sesAcikMiKapaliMi")) == 0)
-        {
-            soundMuteButton.GetComponent<Image>().sprite = soundUnmuteSprite;
-            AudioListener.volume = 1f; //sesi ac
-        }
-        else if ((PlayerPrefs.GetInt("sesAcikMiKapaliMi")) == 1)
-        {
-            soundMuteButton.GetComponent<Image>().sprite = soundMuteSprite;
-            AudioListener.volume = 0f; //sesi kapat
-        }
+        showAd();
     }
 
     private void showAd()
@@ -185,6 +101,38 @@ public class GameControl : MonoBehaviour
             GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<AdControl>().reklamiGoster();
 #endif
             PlayerPrefs.SetInt("oyunBittiSayac", 0);
+        }
+    }
+
+    public void goToMainMenu()
+    {
+        SceneControl.sceneManager.loadScene(0);
+    }
+
+    public void restartGame()
+    {
+        UIControl.UIManager.gameOverPanel.SetActive(false);
+        SceneControl.sceneManager.loadScene(1);
+    }
+
+    public void gamePauseAndUnpause() //oyunu durdur butonuna basıldığında
+    {
+        if (Time.timeScale > 0) //oyun devam ediyorsa
+        {
+            gamePausedTimeScale = Time.timeScale; //kalınan hız bilgisini al
+            Time.timeScale = 0; // oyunu durdur
+            UIControl.UIManager.pauseGameButton.GetComponent<Image>().sprite = UIControl.UIManager.gameContinueSprite;
+            UIControl.UIManager.gamePausedPanel.SetActive(true);
+            AudioListener.pause = true; //sesleri kapat
+            UIControl.UIManager.changeColorImage.enabled = false; // oyun durduğunda ufonun rengi değiştirilemesin
+        }
+        else if (Time.timeScale == 0) // oyun durmuşsa
+        {
+            Time.timeScale = gamePausedTimeScale; //oyuna kalınan hızdan devam et
+            UIControl.UIManager.pauseGameButton.GetComponent<Image>().sprite = UIControl.UIManager.gamePauseSprite;
+            UIControl.UIManager.gamePausedPanel.SetActive(false);
+            AudioListener.pause = false;//sesi tekrar ac
+            UIControl.UIManager.changeColorImage.enabled = true; // ufo rengi değiştirmeyi tekrar aktif et
         }
     }
 }
