@@ -12,7 +12,9 @@ public class GameControl : MonoBehaviour
     private float gamePausedTimeScale { get; set; }
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
-    private static int spaceMineValue { get; set; }
+    public int spaceMineValue { get; private set; }
+    public int spaceMineForDurUpgrade = 5;
+    public int spaceMineForSpeedUpgrade = 10;
 
     public static GameControl gameManager { get; private set; } //basic singleton
 
@@ -101,6 +103,9 @@ public class GameControl : MonoBehaviour
         UIControl.UIManager.gameOverPanel.SetActive(true);
         assignHighscore();
         UIControl.UIManager.pauseGameButton.SetActive(false);
+
+        //check out mines for upgrade system
+        UIControl.UIManager.upgradeSystem();
 
         //game over counter for ad
         gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");

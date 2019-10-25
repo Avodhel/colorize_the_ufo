@@ -206,19 +206,25 @@ public class UfoControl : MonoBehaviour
     #endregion
 
     #region Ufo Upgrade System
-    public void ufoSpeedUpgrade()
-    {
-        ufoSpeed += 0.1f;
-
-        UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
-    }
-
     public void ufoDurUpgrade()
     {
         ufoDurability += 25;
         durEffectValue = 1 / (ufoDurability / 25);
 
         UIControl.UIManager.ufoDurabilityText.text = "Ufo Durability: " + ufoDurability;
+        GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForDurUpgrade);
+        GameControl.gameManager.spaceMineForDurUpgrade += GameControl.gameManager.spaceMineForDurUpgrade;
+        UIControl.UIManager.upgradeSystem();
+    }
+
+    public void ufoSpeedUpgrade()
+    {
+        ufoSpeed += 0.1f;
+
+        UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
+        GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForSpeedUpgrade);
+        GameControl.gameManager.spaceMineForSpeedUpgrade += GameControl.gameManager.spaceMineForSpeedUpgrade;
+        UIControl.UIManager.upgradeSystem();
     }
     #endregion
 
@@ -300,14 +306,11 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "yavaslatanCisimTag")
         {
-            if (Time.timeScale > 0.1f) //hiz 0.1'den büyükse
+            if (Time.timeScale >= 0.6f)
             {
                 FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
                 col.gameObject.SetActive(false);
-                //if (Time.timeScale > 0.1f)
-                //{
                 GameControl.gameManager.gameSpeed("reduce", 0.1f);
-                //}
             }
             else
             {

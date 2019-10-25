@@ -228,6 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseGameButton: {fileID: 931593149}
   soundMuteButton: {fileID: 1517436063}
+  upgradeDurabilityButton: {fileID: 1476974023}
+  upgradeSpeedButton: {fileID: 2067576496}
   gamePauseSprite: {fileID: 21300006, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
   gameContinueSprite: {fileID: 21300002, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
   soundUnmuteSprite: {fileID: 21300014, guid: c88b0a13b41e9b14c8ff097685058ede, type: 3}
@@ -241,6 +243,8 @@ MonoBehaviour:
   spaceMineText: {fileID: 1276183580}
   ufoSpeedText: {fileID: 905534853}
   ufoDurabilityText: {fileID: 660770308}
+  upgradeDurabilityButtonText: {fileID: 1176470128}
+  upgradeSpeedButtonText: {fileID: 71308628}
 --- !u!1 &58483229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,6 +1775,8 @@ MonoBehaviour:
   - {r: 0.003921569, g: 0.44705886, b: 0.64705884, a: 1}
   - {r: 0.3443396, g: 0.7968738, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
+  spaceMineForDurUpgrade: 5
+  spaceMineForSpeedUpgrade: 10
 --- !u!1 &540815690
 GameObject:
   m_ObjectHideFlags: 0
