@@ -8,10 +8,11 @@ public class GameControl : MonoBehaviour
     public Color[] healthBarColors;
     public Color[] energyBarColors;
 
+    private int gameOverCounter = 0;
     private float gamePausedTimeScale { get; set; }
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
-    private int gameOverCounter = 0;
+    private static int spaceMineValue { get; set; }
 
     public static GameControl gameManager { get; private set; } //basic singleton
 
@@ -26,7 +27,7 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
         }
 
-        resetScoreAndSpeed();
+        loadValues();
         loadHighscore();
     }
 
@@ -35,13 +36,15 @@ public class GameControl : MonoBehaviour
         //PlayerPrefs.DeleteAll();
     }
 
-    private void resetScoreAndSpeed()
+    private void loadValues()
     {
         point = 0;
         UIControl.UIManager.pointText.text = "Score: " + point;
 
         Time.timeScale = 1f;
         UIControl.UIManager.speedText.text = "Speed: " + Time.timeScale;
+
+        UIControl.UIManager.spaceMineText.text = "Space Mine: " + spaceMineValue;
     }
 
     public void increaseScore(int value)
@@ -77,6 +80,20 @@ public class GameControl : MonoBehaviour
         }
 
         UIControl.UIManager.speedText.text = "Speed: " + System.Math.Round(Time.timeScale, 2);
+    }
+
+    public void spaceMine(string state, int value)
+    {
+        if (state == "increase")
+        {
+            spaceMineValue += value;
+        }
+        else if (state == "reduce")
+        {
+            spaceMineValue -= value;
+        }
+
+        UIControl.UIManager.spaceMineText.text = "Space Mine: " + spaceMineValue;
     }
 
     public void gameOver()

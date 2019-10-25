@@ -205,6 +205,7 @@ public class UfoControl : MonoBehaviour
                 col.gameObject.SetActive(false);
                 GameControl.gameManager.increaseScore(1);
                 energyBarAction("increase", 0.005f);
+                GameControl.gameManager.spaceMine("increase", 1);
             }
             else
             {

@@ -24,6 +24,7 @@ public class UIControl : MonoBehaviour {
     public Text pointText;
     public Text speedText;
     public Text highScoreText;
+    public Text spaceMineText;
 
     public static UIControl UIManager { get; private set; }
 
