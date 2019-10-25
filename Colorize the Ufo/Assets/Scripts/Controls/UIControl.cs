@@ -48,30 +48,30 @@ public class UIControl : MonoBehaviour {
 
     private void Start()
     {
-        upgradeSystem();
+        upgradeControl();
     }
 
-    public void upgradeSystem()
+    public void upgradeControl()
     {
         //Durability
-        if (GameControl.gameManager.spaceMineValue < GameControl.gameManager.spaceMineForDurUpgrade)
+        if (GameControl.gameManager.spaceMineValue >= GameControl.gameManager.spaceMineForDurUpgrade)
         {
-            upgradeDurabilityButton.GetComponent<Button>().interactable = false;
+            upgradeDurabilityButton.GetComponent<Button>().interactable = true;
         }
         else
         {
-            upgradeDurabilityButton.GetComponent<Button>().interactable = true;
+            upgradeDurabilityButton.GetComponent<Button>().interactable = false;
         }
         upgradeDurabilityButtonText.text = "Upgrade (" + GameControl.gameManager.spaceMineForDurUpgrade + " Mines)";
 
         //Speed
-        if (GameControl.gameManager.spaceMineValue < GameControl.gameManager.spaceMineForSpeedUpgrade)
+        if (GameControl.gameManager.spaceMineValue >= GameControl.gameManager.spaceMineForSpeedUpgrade)
         {
-            upgradeSpeedButton.GetComponent<Button>().interactable = false;
+            upgradeSpeedButton.GetComponent<Button>().interactable = true;
         }
         else
         {
-            upgradeSpeedButton.GetComponent<Button>().interactable = true;
+            upgradeSpeedButton.GetComponent<Button>().interactable = false;
         }
         upgradeSpeedButtonText.text = "Upgrade (" + GameControl.gameManager.spaceMineForSpeedUpgrade + " Mines)";
     }

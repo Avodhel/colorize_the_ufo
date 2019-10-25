@@ -6,14 +6,13 @@ using UnityStandardAssets.CrossPlatformInput; //library for mobile entegration
 public class UfoControl : MonoBehaviour
 {
     [Header("Ufo Speed")]
-    [SerializeField]
-    private float ufoSpeed = 3f;
+    //[SerializeField]
+    public float ufoSpeed = 3f;
 
     [Header("Ufo Durability")]
-    [SerializeField]
-    private int ufoDurability = 100;
-    [SerializeField]
-    private float durEffectValue = 0.25f;
+    //[SerializeField]
+    public int ufoDurability = 100;
+    public float durEffectValue = 0.25f;
 
     [Header("Movement Border")]
     [SerializeField]
@@ -56,6 +55,9 @@ public class UfoControl : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         ufoEnginePrefab.SetActive(true); //ufo motoru görünür yap
+
+        loadUfoData();
+        getUpgradeValues();
     }
 
     private void Update()
@@ -206,15 +208,24 @@ public class UfoControl : MonoBehaviour
     #endregion
 
     #region Ufo Upgrade System
+    private void getUpgradeValues()
+    {
+        UIControl.UIManager.ufoDurabilityText.text = "Ufo Durability: " + ufoDurability;
+        UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
+    }
+
     public void ufoDurUpgrade()
     {
         ufoDurability += 25;
-        durEffectValue = 1 / (ufoDurability / 25);
+        durEffectValue = 1f / (ufoDurability / 25);
 
         UIControl.UIManager.ufoDurabilityText.text = "Ufo Durability: " + ufoDurability;
         GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForDurUpgrade);
         GameControl.gameManager.spaceMineForDurUpgrade += GameControl.gameManager.spaceMineForDurUpgrade;
-        UIControl.UIManager.upgradeSystem();
+        UIControl.UIManager.upgradeControl();
+
+        saveUfoData();
+        GameControl.gameManager.saveGameData();
     }
 
     public void ufoSpeedUpgrade()
@@ -224,7 +235,10 @@ public class UfoControl : MonoBehaviour
         UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
         GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForSpeedUpgrade);
         GameControl.gameManager.spaceMineForSpeedUpgrade += GameControl.gameManager.spaceMineForSpeedUpgrade;
-        UIControl.UIManager.upgradeSystem();
+        UIControl.UIManager.upgradeControl();
+
+        saveUfoData();
+        GameControl.gameManager.saveGameData();
     }
     #endregion
 
@@ -329,6 +343,22 @@ public class UfoControl : MonoBehaviour
             GameControl.gameManager.increaseScore(5);
             energyBarAction("increase", 0.015f);
         }
+    }
+    #endregion
+
+    #region Save and Load System
+    private void saveUfoData()
+    {
+        SaveSystem.saveUfoData(this);
+    }
+
+    private void loadUfoData()
+    {
+        UfoData ufoData = SaveSystem.loadUfoData();
+
+        ufoSpeed = ufoData.ufoSpeed;
+        ufoDurability = ufoData.ufoDurability;
+        durEffectValue = ufoData.durEffectValue;
     }
     #endregion
 }

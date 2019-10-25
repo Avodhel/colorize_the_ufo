@@ -462,7 +462,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: '
+  m_Text: 'Score: 0'
 --- !u!222 &103328718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3375,7 +3375,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Speed: '
+  m_Text: 'Speed: 1'
 --- !u!222 &1167085933
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3615,7 +3615,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Space Mine: '
+  m_Text: 'Space Mine: 0'
 --- !u!222 &1276183581
 CanvasRenderer:
   m_ObjectHideFlags: 0

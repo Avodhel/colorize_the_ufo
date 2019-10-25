@@ -12,7 +12,7 @@ public class GameControl : MonoBehaviour
     private float gamePausedTimeScale { get; set; }
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
-    public int spaceMineValue { get; private set; }
+    public int spaceMineValue { get; set; }
     public int spaceMineForDurUpgrade = 5;
     public int spaceMineForSpeedUpgrade = 10;
 
@@ -29,6 +29,7 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
         }
 
+        loadGameData();
         loadValues();
         loadHighscore();
     }
@@ -36,6 +37,7 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
         //PlayerPrefs.DeleteAll();
+        //SaveSystem.deleteDatas();
     }
 
     private void loadValues()
@@ -49,6 +51,7 @@ public class GameControl : MonoBehaviour
         UIControl.UIManager.spaceMineText.text = "Space Mine: " + spaceMineValue;
     }
 
+    #region Score and Highscore
     public void increaseScore(int value)
     {
         point += value;
@@ -69,6 +72,7 @@ public class GameControl : MonoBehaviour
         }
         UIControl.UIManager.highScoreText.text = "High Score: " + PlayerPrefs.GetInt("enYuksekPuanKayit", enYuksekPuan); // en yuksek puanın gösterilmesi
     }
+    #endregion
 
     public void gameSpeed(string state, float value)
     {
@@ -105,7 +109,10 @@ public class GameControl : MonoBehaviour
         UIControl.UIManager.pauseGameButton.SetActive(false);
 
         //check out mines for upgrade system
-        UIControl.UIManager.upgradeSystem();
+        UIControl.UIManager.upgradeControl();
+
+        //save game datas
+        saveGameData();
 
         //game over counter for ad
         gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
@@ -159,6 +166,22 @@ public class GameControl : MonoBehaviour
             AudioListener.pause = false;//sesi tekrar ac
             UIControl.UIManager.changeColorImage.enabled = true; // ufo rengi değiştirmeyi tekrar aktif et
         }
+    }
+    #endregion
+
+    #region Save and Load System
+    public void saveGameData()
+    {
+        SaveSystem.saveGameData(this);
+    }
+
+    public void loadGameData()
+    {
+        GameData gameData = SaveSystem.loadGameData();
+
+        spaceMineValue = gameData.spaceMineValue;
+        spaceMineForDurUpgrade = gameData.spaceMineForDurUpgrade;
+        spaceMineForSpeedUpgrade = gameData.spaceMineForSpeedUpgrade;
     }
     #endregion
 }
