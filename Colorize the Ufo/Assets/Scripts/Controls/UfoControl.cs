@@ -7,7 +7,13 @@ public class UfoControl : MonoBehaviour
 {
     [Header("Ufo Speed")]
     [SerializeField]
-    private float speed = 3.3f;
+    private float ufoSpeed = 3f;
+
+    [Header("Ufo Durability")]
+    [SerializeField]
+    private int ufoDurability = 100;
+    [SerializeField]
+    private float durEffectValue = 0.25f;
 
     [Header("Movement Border")]
     [SerializeField]
@@ -63,22 +69,7 @@ public class UfoControl : MonoBehaviour
         energyBarAction("reduce", 0.00020f);
     }
 
-    private void ufoMovement()
-    {
-        userInput();
-
-        if (moveControl)
-        {
-            vec3 = new Vector3(horizontal * speed, rb2d.velocity.y, 0);
-            rb2d.velocity = vec3;
-        }
-
-        rb2d.position = new Vector3( // ufonun ekranın dışına çıkmaması için sınır koordinatlarını belirliyoruz.
-        Mathf.Clamp(rb2d.position.x, minX, maxX),
-        transform.position.y
-        );
-    }
-
+    #region User Input
     private void userInput()
     {
 #if UNITY_WEBGL
@@ -89,7 +80,27 @@ public class UfoControl : MonoBehaviour
                                                                          /*hareket tuşuna basıldığında getaxisraw 0'dan 1 olur getaxis ise 0.1'den 0.2*/
 #endif
     }
+    #endregion
 
+    #region Ufo Movement
+    private void ufoMovement()
+    {
+        userInput();
+
+        if (moveControl)
+        {
+            vec3 = new Vector3(horizontal * ufoSpeed, rb2d.velocity.y, 0);
+            rb2d.velocity = vec3;
+        }
+
+        rb2d.position = new Vector3( // ufonun ekranın dışına çıkmaması için sınır koordinatlarını belirliyoruz.
+        Mathf.Clamp(rb2d.position.x, minX, maxX),
+        transform.position.y
+        );
+    }
+    #endregion
+
+    #region Ufo's Color
     private void changeUfosColor()
     {
 #if UNITY_WEBGL
@@ -114,7 +125,24 @@ public class UfoControl : MonoBehaviour
         }
 #endif
     }
+    #endregion
 
+    #region Ufo explode
+    public void ufoExploded()
+    {
+        ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
+        Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
+        FindObjectOfType<SoundControl>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
+        transform.gameObject.SetActive(false);
+
+        energyBarAction("reset", 0);
+        healthBarAction("reset", 0);
+
+        GameControl.gameManager.gameOver();
+    }
+    #endregion
+
+    #region Health and Energy Bars
     public void healthBarAction(string con, float value)
     {
         if (con == "increase")
@@ -175,7 +203,26 @@ public class UfoControl : MonoBehaviour
             bar.color = colors[2];
         }
     }
+    #endregion
 
+    #region Ufo Upgrade System
+    public void ufoSpeedUpgrade()
+    {
+        ufoSpeed += 0.1f;
+
+        UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
+    }
+
+    public void ufoDurUpgrade()
+    {
+        ufoDurability += 25;
+        durEffectValue = 1 / (ufoDurability / 25);
+
+        UIControl.UIManager.ufoDurabilityText.text = "Ufo Durability: " + ufoDurability;
+    }
+    #endregion
+
+    #region Collision
     private void OnCollisionEnter2D(Collision2D col) // geçirgen olmayan bir yüzeye temas edildiğinde çalışır.
     {
         if (col.transform.tag == "engellerTag") // ufo engellere çarptığında
@@ -211,7 +258,7 @@ public class UfoControl : MonoBehaviour
             {
                 FindObjectOfType<SoundControl>().sesOynat("Carpma"); //carpma sesini oynat
                 col.gameObject.SetActive(false);
-                healthBarAction("reduce", 0.25f);
+                healthBarAction("reduce", durEffectValue);
             }
         }
 
@@ -228,7 +275,7 @@ public class UfoControl : MonoBehaviour
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 col.gameObject.SetActive(false);
-                healthBarAction("increase", 0.5f);
+                healthBarAction("increase", durEffectValue * 2);
             }
             else
             {
@@ -268,7 +315,9 @@ public class UfoControl : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Trigger
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == "randomEngelTag")
@@ -278,17 +327,5 @@ public class UfoControl : MonoBehaviour
             energyBarAction("increase", 0.015f);
         }
     }
-
-    public void ufoExploded()
-    {
-        ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
-        Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
-        FindObjectOfType<SoundControl>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
-        transform.gameObject.SetActive(false);
-
-        energyBarAction("reset", 0);
-        healthBarAction("reset", 0);
-
-        GameControl.gameManager.gameOver();
-    }
+    #endregion
 }

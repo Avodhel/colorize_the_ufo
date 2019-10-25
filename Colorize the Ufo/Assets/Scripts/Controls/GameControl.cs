@@ -102,7 +102,7 @@ public class GameControl : MonoBehaviour
         assignHighscore();
         UIControl.UIManager.pauseGameButton.SetActive(false);
 
-        //game ver counter for ad
+        //game over counter for ad
         gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
         gameOverCounter++;
         PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
@@ -110,6 +110,7 @@ public class GameControl : MonoBehaviour
         showAd();
     }
 
+    #region Show Ad
     private void showAd()
     {
         if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
@@ -120,7 +121,9 @@ public class GameControl : MonoBehaviour
             PlayerPrefs.SetInt("oyunBittiSayac", 0);
         }
     }
+    #endregion
 
+    #region Button Actions
     public void goToMainMenu()
     {
         SceneControl.sceneManager.loadScene(0);
@@ -152,4 +155,5 @@ public class GameControl : MonoBehaviour
             UIControl.UIManager.changeColorImage.enabled = true; // ufo rengi değiştirmeyi tekrar aktif et
         }
     }
+    #endregion
 }
