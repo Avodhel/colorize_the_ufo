@@ -68,6 +68,10 @@ public class SpaceObjectsControl : MonoBehaviour {
                 RO.SetActive(true);
                 RO.transform.position = vec2Pos;
                 RO.GetComponent<ISpaceObject>().objectMovement();
+                if (RO.transform.tag != "meteorTag")
+                {
+                    RO.transform.GetComponent<CircleCollider2D>().isTrigger = false;
+                }
 
                 yield return new WaitForSeconds(spawnRareObjectTime);
             }

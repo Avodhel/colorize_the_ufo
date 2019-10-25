@@ -210,8 +210,8 @@ public class UfoControl : MonoBehaviour
     #region Ufo Upgrade System
     private void getUpgradeValues()
     {
-        UIControl.UIManager.ufoDurabilityText.text = "Ufo Durability: " + ufoDurability;
-        UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
+        UIControl.UIManager.ufoDurabilityText.text = "Ufo's Durability: " + ufoDurability;
+        UIControl.UIManager.ufoSpeedText.text = "Ufo's Move Speed: " + System.Math.Round(ufoSpeed, 2);
     }
 
     public void ufoDurUpgrade()
@@ -219,7 +219,7 @@ public class UfoControl : MonoBehaviour
         ufoDurability += 25;
         durEffectValue = 1f / (ufoDurability / 25);
 
-        UIControl.UIManager.ufoDurabilityText.text = "Ufo Durability: " + ufoDurability;
+        UIControl.UIManager.ufoDurabilityText.text = "Ufo's Durability: " + ufoDurability;
         GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForDurUpgrade);
         GameControl.gameManager.spaceMineForDurUpgrade += GameControl.gameManager.spaceMineForDurUpgrade;
         UIControl.UIManager.upgradeControl();
@@ -232,7 +232,7 @@ public class UfoControl : MonoBehaviour
     {
         ufoSpeed += 0.1f;
 
-        UIControl.UIManager.ufoSpeedText.text = "Ufo Movement Speed: " + System.Math.Round(ufoSpeed, 2);
+        UIControl.UIManager.ufoSpeedText.text = "Ufo's Move Speed: " + System.Math.Round(ufoSpeed, 2);
         GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForSpeedUpgrade);
         GameControl.gameManager.spaceMineForSpeedUpgrade += GameControl.gameManager.spaceMineForSpeedUpgrade;
         UIControl.UIManager.upgradeControl();
@@ -251,9 +251,9 @@ public class UfoControl : MonoBehaviour
             {
                 if (col.transform.GetChild(i).tag == "randomEngelTag") //tagi "randomengeltag" ise
                 {
-                    if (col.transform.GetChild(i).GetComponent<SpriteRenderer>().color == transform.GetComponent<SpriteRenderer>().color) //engel ile topun rengi aynı ise
+                    if (col.transform.GetChild(i).GetComponent<SpriteRenderer>().color == transform.GetComponent<SpriteRenderer>().color) //engel ile ufonun rengi aynı ise
                     {
-                        col.transform.GetChild(i).GetComponent<BoxCollider2D>().isTrigger = true; //trigger ını aç ki top geçebilsin.
+                        col.transform.GetChild(i).GetComponent<BoxCollider2D>().isTrigger = true; //trigger ını aç ki ufo geçebilsin.
                     }
                 }
             }
@@ -291,7 +291,7 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "canVerenCisimTag")
         {
-            if (healthBar.fillAmount < 1) //can full değilse
+            if (healthBar.fillAmount < 1f) //can full değilse
             {
                 FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 col.gameObject.SetActive(false);
