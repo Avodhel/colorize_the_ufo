@@ -190,10 +190,13 @@ public class GameControl : MonoBehaviour
     {
         GameData gameData = SaveSystem.loadGameData();
 
-        spaceMineValue = gameData.spaceMineValue;
-        spaceMineForDurUpgrade = gameData.spaceMineForDurUpgrade;
-        spaceMineForSpeedUpgrade = gameData.spaceMineForSpeedUpgrade;
-        showPcControlTutorial = gameData.showPcControlTutorial;
+        if (gameData != null)
+        {
+            spaceMineValue = gameData.spaceMineValue;
+            spaceMineForDurUpgrade = gameData.spaceMineForDurUpgrade;
+            spaceMineForSpeedUpgrade = gameData.spaceMineForSpeedUpgrade;
+            showPcControlTutorial = gameData.showPcControlTutorial;
+        }
     }
     #endregion
 }

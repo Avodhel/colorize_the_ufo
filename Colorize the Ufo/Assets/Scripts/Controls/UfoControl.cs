@@ -376,9 +376,12 @@ public class UfoControl : MonoBehaviour
     {
         UfoData ufoData = SaveSystem.loadUfoData();
 
-        ufoSpeed = ufoData.ufoSpeed;
-        ufoDurability = ufoData.ufoDurability;
-        durEffectValue = ufoData.durEffectValue;
+        if (ufoData != null)
+        {
+            ufoSpeed = ufoData.ufoSpeed;
+            ufoDurability = ufoData.ufoDurability;
+            durEffectValue = ufoData.durEffectValue;
+        }
     }
     #endregion
 }
