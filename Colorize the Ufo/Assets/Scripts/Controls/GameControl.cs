@@ -15,6 +15,8 @@ public class GameControl : MonoBehaviour
     [HideInInspector]
     public int spaceMineForSpeedUpgrade = 13;
     [HideInInspector]
+    public int maxSpaceMine = 1;
+    [HideInInspector]
     public bool showPcControlTutorial = true;
 
     private int gameOverCounter = 0;
@@ -195,6 +197,7 @@ public class GameControl : MonoBehaviour
             spaceMineValue = gameData.spaceMineValue;
             spaceMineForDurUpgrade = gameData.spaceMineForDurUpgrade;
             spaceMineForSpeedUpgrade = gameData.spaceMineForSpeedUpgrade;
+            maxSpaceMine = gameData.maxSpaceMine;
             showPcControlTutorial = gameData.showPcControlTutorial;
         }
     }

@@ -23,6 +23,7 @@ public class GameData
     public int spaceMineValue;
     public int spaceMineForDurUpgrade;
     public int spaceMineForSpeedUpgrade;
+    public int maxSpaceMine;
     public bool showPcControlTutorial;
 
     public GameData(GameControl gameData)
@@ -30,6 +31,7 @@ public class GameData
         spaceMineValue = gameData.spaceMineValue;
         spaceMineForDurUpgrade = gameData.spaceMineForDurUpgrade;
         spaceMineForSpeedUpgrade = gameData.spaceMineForSpeedUpgrade;
+        maxSpaceMine = gameData.maxSpaceMine;
         showPcControlTutorial = gameData.showPcControlTutorial;
     }
 

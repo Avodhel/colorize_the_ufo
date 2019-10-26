@@ -243,6 +243,7 @@ public class UfoControl : MonoBehaviour
         GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForDurUpgrade);
         GameControl.gameManager.spaceMineForDurUpgrade += GameControl.gameManager.spaceMineForDurUpgrade;
         UIControl.UIManager.upgradeControl();
+        GameControl.gameManager.maxSpaceMine += 1;
 
         saveUfoData();
         GameControl.gameManager.saveGameData();
@@ -256,6 +257,7 @@ public class UfoControl : MonoBehaviour
         GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForSpeedUpgrade);
         GameControl.gameManager.spaceMineForSpeedUpgrade += GameControl.gameManager.spaceMineForSpeedUpgrade;
         UIControl.UIManager.upgradeControl();
+        GameControl.gameManager.maxSpaceMine += 1;
 
         saveUfoData();
         GameControl.gameManager.saveGameData();
@@ -292,7 +294,9 @@ public class UfoControl : MonoBehaviour
                 col.gameObject.SetActive(false);
                 GameControl.gameManager.increaseScore(1);
                 energyBarAction("increase", 0.005f);
-                GameControl.gameManager.spaceMine("increase", 1);
+                int incSpaceMineValue = Random.Range(1, GameControl.gameManager.maxSpaceMine + 1);
+                //Debug.Log(incSpaceMineValue);
+                GameControl.gameManager.spaceMine("increase", incSpaceMineValue);
             }
             else
             {
