@@ -76,6 +76,16 @@ public class UfoControl : MonoBehaviour
     {
 #if UNITY_WEBGL
         horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
+
+        //tutorial
+        if (transform.position.x < 0)
+        {
+            UIControl.UIManager.tutorialLeftImage.SetActive(false);
+        }
+        else if(transform.position.x > 0)
+        {
+            UIControl.UIManager.tutorialRightImage.SetActive(false);
+        }
 #elif UNITY_ANDROID
         horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //mobilde hareket
                                                                          //#endif
@@ -114,6 +124,16 @@ public class UfoControl : MonoBehaviour
                 index = 1;
             }
             spriteRenderer.color = colors[index - 1];
+        }
+
+        //tutorial
+        if (Input.GetButtonDown("Up"))
+        {
+            UIControl.UIManager.tutorialUpImage.SetActive(false);
+        }
+        else if (Input.GetButtonDown("Down"))
+        {
+            UIControl.UIManager.tutorialDownImage.SetActive(false);
         }
 #elif UNITY_ANDROID
         if (CrossPlatformInputManager.GetButtonDown("Jump"))

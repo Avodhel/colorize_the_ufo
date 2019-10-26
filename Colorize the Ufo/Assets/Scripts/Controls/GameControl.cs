@@ -14,11 +14,14 @@ public class GameControl : MonoBehaviour
     public int spaceMineForDurUpgrade = 7;
     [HideInInspector]
     public int spaceMineForSpeedUpgrade = 13;
+    [HideInInspector]
+    public bool showPcControlTutorial = true;
 
     private int gameOverCounter = 0;
     private float gamePausedTimeScale { get; set; }
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
+
 
     public static GameControl gameManager { get; private set; } //basic singleton
 
@@ -115,6 +118,10 @@ public class GameControl : MonoBehaviour
         //check out mines for upgrade system
         UIControl.UIManager.upgradeControl();
 
+        //disable Pc Control tutorial
+        UIControl.UIManager.pcControlTutorial.SetActive(false);
+        showPcControlTutorial = false;
+
         //save game datas
         saveGameData();
 
@@ -160,7 +167,7 @@ public class GameControl : MonoBehaviour
             UIControl.UIManager.pauseGameButton.GetComponent<Image>().sprite = UIControl.UIManager.gameContinueSprite;
             UIControl.UIManager.gamePausedPanel.SetActive(true);
             AudioListener.pause = true; //sesleri kapat
-            UIControl.UIManager.changeColorImage.enabled = false; // oyun durduğunda ufonun rengi değiştirilemesin
+            UIControl.UIManager.changeColorImage.enabled = false; // oyun durduğunda ufonun rengi değiştirilemesin (mobil)
         }
         else if (Time.timeScale == 0) // oyun durmuşsa
         {
@@ -168,7 +175,7 @@ public class GameControl : MonoBehaviour
             UIControl.UIManager.pauseGameButton.GetComponent<Image>().sprite = UIControl.UIManager.gamePauseSprite;
             UIControl.UIManager.gamePausedPanel.SetActive(false);
             AudioListener.pause = false;//sesi tekrar ac
-            UIControl.UIManager.changeColorImage.enabled = true; // ufo rengi değiştirmeyi tekrar aktif et
+            UIControl.UIManager.changeColorImage.enabled = true; // ufo rengi değiştirmeyi tekrar aktif et (mobil)
         }
     }
     #endregion
@@ -186,6 +193,7 @@ public class GameControl : MonoBehaviour
         spaceMineValue = gameData.spaceMineValue;
         spaceMineForDurUpgrade = gameData.spaceMineForDurUpgrade;
         spaceMineForSpeedUpgrade = gameData.spaceMineForSpeedUpgrade;
+        showPcControlTutorial = gameData.showPcControlTutorial;
     }
     #endregion
 }

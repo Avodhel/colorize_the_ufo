@@ -18,6 +18,13 @@ public class UIControl : MonoBehaviour {
     [Header("Images")]
     public Image changeColorImage;
 
+    [Header("PC Control Tutorial")]
+    public GameObject pcControlTutorial;
+    public GameObject tutorialUpImage;
+    public GameObject tutorialDownImage;
+    public GameObject tutorialLeftImage;
+    public GameObject tutorialRightImage;
+
     [Header("Panels")]
     public GameObject gamePausedPanel;
     public GameObject gameOverPanel;
@@ -53,6 +60,13 @@ public class UIControl : MonoBehaviour {
     private void Start()
     {
         upgradeControl();
+
+#if UNITY_WEBGL
+        if (GameControl.gameManager.showPcControlTutorial)
+        {
+            pcControlTutorial.SetActive(true);
+        }
+#endif
     }
 
     public void upgradeControl()
