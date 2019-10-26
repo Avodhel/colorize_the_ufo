@@ -1,5 +1,5 @@
 # COLORIZE THE UFO
-![colorize_the_ufo](colorize_the_ufo.png)
+![colorize_the_ufo](ctu1.png)
 
 Colorize the Ufo is a simple 2D game. Change Ufo's color, collect the objects which same color, overcome obstacles and staying alive in space.
 
@@ -12,5 +12,3 @@ Colorize the Ufo is a simple 2D game. Change Ufo's color, collect the objects wh
 
 - All of the textures created with Adobe Illustrator.
 - All of sounds created by differents artists from [FreeSound](https://freesound.org).
-
-## ʕ•㉨•ʔ
