@@ -32,6 +32,10 @@ public class UIControl : MonoBehaviour {
     public Text upgradeDurabilityButtonText;
     public Text upgradeSpeedButtonText;
 
+    [Header("Colors")]
+    public Color upgradeDurButtonColor;
+    public Color upgradeSpeedButtonColor;
+
     public static UIControl UIManager { get; private set; }
 
     private void Awake()
@@ -57,10 +61,12 @@ public class UIControl : MonoBehaviour {
         if (GameControl.gameManager.spaceMineValue >= GameControl.gameManager.spaceMineForDurUpgrade)
         {
             upgradeDurabilityButton.GetComponent<Button>().interactable = true;
+            upgradeDurabilityButton.GetComponent<Image>().color = upgradeDurButtonColor;
         }
         else
         {
             upgradeDurabilityButton.GetComponent<Button>().interactable = false;
+            upgradeDurabilityButton.GetComponent<Image>().color = Color.gray;
         }
         upgradeDurabilityButtonText.text = "Upgrade (" + GameControl.gameManager.spaceMineForDurUpgrade + " Mines)";
 
@@ -68,10 +74,12 @@ public class UIControl : MonoBehaviour {
         if (GameControl.gameManager.spaceMineValue >= GameControl.gameManager.spaceMineForSpeedUpgrade)
         {
             upgradeSpeedButton.GetComponent<Button>().interactable = true;
+            upgradeSpeedButton.GetComponent<Image>().color = upgradeSpeedButtonColor;
         }
         else
         {
             upgradeSpeedButton.GetComponent<Button>().interactable = false;
+            upgradeSpeedButton.GetComponent<Image>().color = Color.gray;
         }
         upgradeSpeedButtonText.text = "Upgrade (" + GameControl.gameManager.spaceMineForSpeedUpgrade + " Mines)";
     }

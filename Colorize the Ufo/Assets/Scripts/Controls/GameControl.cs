@@ -8,13 +8,17 @@ public class GameControl : MonoBehaviour
     public Color[] healthBarColors;
     public Color[] energyBarColors;
 
+    [HideInInspector]
+    public int spaceMineValue { get; set; }
+    [HideInInspector]
+    public int spaceMineForDurUpgrade = 7;
+    [HideInInspector]
+    public int spaceMineForSpeedUpgrade = 13;
+
     private int gameOverCounter = 0;
     private float gamePausedTimeScale { get; set; }
     private static int point { get; set; }
     private static int enYuksekPuan { get; set; }
-    public int spaceMineValue { get; set; }
-    public int spaceMineForDurUpgrade = 5;
-    public int spaceMineForSpeedUpgrade = 10;
 
     public static GameControl gameManager { get; private set; } //basic singleton
 
@@ -48,7 +52,7 @@ public class GameControl : MonoBehaviour
         Time.timeScale = 1f;
         UIControl.UIManager.speedText.text = "Speed: " + Time.timeScale;
 
-        UIControl.UIManager.spaceMineText.text = "Space Mine: " + spaceMineValue;
+        UIControl.UIManager.spaceMineText.text = "x " + spaceMineValue;
     }
 
     #region Score and Highscore
@@ -99,7 +103,7 @@ public class GameControl : MonoBehaviour
             spaceMineValue -= value;
         }
 
-        UIControl.UIManager.spaceMineText.text = "Space Mine: " + spaceMineValue;
+        UIControl.UIManager.spaceMineText.text = "x " + spaceMineValue;
     }
 
     public void gameOver()
