@@ -37,4 +37,4 @@ sysinfo.txt
 *.unitypackage
 
 # Some specific Files
-Colorize the Ufo/Assets/Scripts/AdControl.cs*
+Colorize the Ufo/Assets/Scripts/Controls/AdControl.cs*
