@@ -1,5 +1,5 @@
 ﻿public interface IObstacle {
 
-    void obstacleMovement();
-    void changeColor();
+    void ObstacleMovement();
+    void ChangeColor();
 }

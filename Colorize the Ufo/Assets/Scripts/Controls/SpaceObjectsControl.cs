@@ -31,11 +31,11 @@ public class SpaceObjectsControl : MonoBehaviour {
 
     private void Start ()
     {
-        StartCoroutine(spawnFlyingStones());
-        StartCoroutine(spawnRareObjects());
+        StartCoroutine(SpawnFlyingStones());
+        StartCoroutine(SpawnRareObjects());
 	}
 	
-    private IEnumerator spawnFlyingStones()
+    private IEnumerator SpawnFlyingStones()
     {
         yield return new WaitForSeconds(startSpawnTime);
 
@@ -47,7 +47,7 @@ public class SpaceObjectsControl : MonoBehaviour {
                 GameObject FS = FlyingStonePooler.SharedInstance.GetPooledObject(Random.Range(0, FlyingStonePooler.SharedInstance.itemsToPool.Count));
                 FS.SetActive(true);
                 FS.transform.position = vec2Pos;
-                FS.GetComponent<ISpaceObject>().objectMovement();
+                FS.GetComponent<ISpaceObject>().ObjectMovement();
 
                 yield return new WaitForSeconds(spawnFlyingStoneTime);
             }
@@ -55,7 +55,7 @@ public class SpaceObjectsControl : MonoBehaviour {
         }
     }
 
-    private IEnumerator spawnRareObjects()
+    private IEnumerator SpawnRareObjects()
     {
         yield return new WaitForSeconds(10); //başlangıç bekleme suresi
 
@@ -67,7 +67,7 @@ public class SpaceObjectsControl : MonoBehaviour {
                 GameObject RO = RareObjectPooler.SharedInstance.GetPooledObject(Random.Range(0, RareObjectPooler.SharedInstance.itemsToPool.Count));
                 RO.SetActive(true);
                 RO.transform.position = vec2Pos;
-                RO.GetComponent<ISpaceObject>().objectMovement();
+                RO.GetComponent<ISpaceObject>().ObjectMovement();
                 if (RO.transform.tag != "meteorTag")
                 {
                     RO.transform.GetComponent<CircleCollider2D>().isTrigger = false;

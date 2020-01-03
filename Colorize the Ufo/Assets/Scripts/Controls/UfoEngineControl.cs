@@ -17,10 +17,10 @@ public class UfoEngineControl : MonoBehaviour {
 
     private void LateUpdate()
     {
-        moveEngineWithUfo();
+        MoveEngineWithUfo();
     }
 
-    private void moveEngineWithUfo()
+    private void MoveEngineWithUfo()
     {
         //alttaki kod satırı ile ufo motorunu, ufomuz ile birlikte hareket ettiriyoruz.
         gameObject.transform.position = new Vector3(ufo.transform.position.x,

@@ -12,12 +12,12 @@ public class ExplosionControl : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void makeVisible()
+    private void MakeVisible()
     {
         spriteRenderer.enabled = true;
     }
 
-    private void makeInvisible()
+    private void MakeInvisible()
     {
         spriteRenderer.enabled = false;
     }

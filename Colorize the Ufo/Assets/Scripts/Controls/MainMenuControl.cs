@@ -2,13 +2,13 @@
 
 public class MainMenuControl : MonoBehaviour {
 
-    public void oyunaBasla()
+    public void OyunaBasla()
     {
-        SceneControl.sceneManager.loadScene(1);
+        SceneControl.sceneManager.LoadScene(1);
     }
 
-    public void oyundanCik()
-    {
-        Application.Quit();
-    }
+    //public void OyundanCik()
+    //{
+    //    Application.Quit();
+    //}
 }

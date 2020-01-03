@@ -56,23 +56,23 @@ public class UfoControl : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         ufoEnginePrefab.SetActive(true); //ufo motoru görünür yap
 
-        loadUfoData();
-        getUpgradeValues();
+        LoadUfoData();
+        GetUpgradeValues();
     }
 
     private void Update()
     {
-        changeUfosColor();
+        ChangeUfosColor();
     }
 
     private void FixedUpdate()
     {
-        ufoMovement();
-        energyBarAction("reduce", 0.00020f);
+        UfoMovement();
+        EnergyBarAction("reduce", 0.00020f);
     }
 
     #region User Input
-    private void userInput()
+    private void UserInput()
     {
 #if UNITY_WEBGL
         horizontal = Input.GetAxisRaw("Horizontal"); //normal hareket
@@ -95,9 +95,9 @@ public class UfoControl : MonoBehaviour
     #endregion
 
     #region Ufo Movement
-    private void ufoMovement()
+    private void UfoMovement()
     {
-        userInput();
+        UserInput();
 
         if (moveControl)
         {
@@ -113,7 +113,7 @@ public class UfoControl : MonoBehaviour
     #endregion
 
     #region Ufo's Color
-    private void changeUfosColor()
+    private void ChangeUfosColor()
     {
 #if UNITY_WEBGL
         if (Input.GetButtonDown("Up") || Input.GetButtonDown("Down"))
@@ -150,22 +150,22 @@ public class UfoControl : MonoBehaviour
     #endregion
 
     #region Ufo explode
-    public void ufoExploded()
+    public void UfoExploded()
     {
         ufoEnginePrefab.SetActive(false); //ufo motoru görünmez yap
         Instantiate(explosionPrefab, gameObject.transform.localPosition, Quaternion.identity); // patlama efekti oluştur
-        FindObjectOfType<SoundControl>().sesOynat("UfoPatlama"); //ufo patlama sesini oynat
+        FindObjectOfType<SoundControl>().SesOynat("UfoPatlama"); //ufo patlama sesini oynat
         transform.gameObject.SetActive(false);
 
-        energyBarAction("reset", 0);
-        healthBarAction("reset", 0);
+        EnergyBarAction("reset", 0);
+        HealthBarAction("reset", 0);
 
-        GameControl.gameManager.gameOver();
+        GameControl.gameManager.GameOver();
     }
     #endregion
 
     #region Health and Energy Bars
-    public void healthBarAction(string con, float value)
+    public void HealthBarAction(string con, float value)
     {
         if (con == "increase")
         {
@@ -176,10 +176,10 @@ public class UfoControl : MonoBehaviour
             healthBar.fillAmount -= value;
             if (healthBar.fillAmount <= 0) //can bari sifirlaninca ufo patlasın
             {
-                ufoExploded();
+                UfoExploded();
             }
         }
-        barColorize(healthBar, healthBarColors);
+        BarColorize(healthBar, healthBarColors);
 
         if (con == "reset")
         {
@@ -187,7 +187,7 @@ public class UfoControl : MonoBehaviour
         }
     }
 
-    private void energyBarAction(string con, float value)
+    private void EnergyBarAction(string con, float value)
     {
         if (con == "increase")
         {
@@ -201,7 +201,7 @@ public class UfoControl : MonoBehaviour
                 moveControl = false;
             }
         }
-        barColorize(energyBar, energyBarColors);
+        BarColorize(energyBar, energyBarColors);
 
         if (con == "reset")
         {
@@ -209,7 +209,7 @@ public class UfoControl : MonoBehaviour
         }
     }
 
-    private void barColorize(Image bar, Color[] colors)
+    private void BarColorize(Image bar, Color[] colors)
     {
         //colorize bars according to amount
         if (bar.fillAmount >= 0.65f)
@@ -228,39 +228,39 @@ public class UfoControl : MonoBehaviour
     #endregion
 
     #region Ufo Upgrade System
-    private void getUpgradeValues()
+    private void GetUpgradeValues()
     {
         UIControl.UIManager.ufoDurabilityText.text = "Ufo's Durability: " + ufoDurability;
         UIControl.UIManager.ufoSpeedText.text = "Ufo's Move Speed: " + System.Math.Round(ufoSpeed, 2);
     }
 
-    public void ufoDurUpgrade()
+    public void UfoDurUpgrade()
     {
         ufoDurability += 25;
         durEffectValue = 1f / (ufoDurability / 25);
 
         UIControl.UIManager.ufoDurabilityText.text = "Ufo's Durability: " + ufoDurability;
-        GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForDurUpgrade);
-        GameControl.gameManager.spaceMineForDurUpgrade += GameControl.gameManager.spaceMineForDurUpgrade;
-        UIControl.UIManager.upgradeControl();
+        GameControl.gameManager.SpaceMine("reduce", GameControl.gameManager.spaceMineForDurUpgrade);
+        GameControl.gameManager.spaceMineForDurUpgrade += GameControl.gameManager.spaceMineForDurUpgrade / 2;
+        UIControl.UIManager.UpgradeControl();
         GameControl.gameManager.maxSpaceMine += 1;
 
-        saveUfoData();
-        GameControl.gameManager.saveGameData();
+        SaveUfoData();
+        GameControl.gameManager.SaveGameData();
     }
 
-    public void ufoSpeedUpgrade()
+    public void UfoSpeedUpgrade()
     {
         ufoSpeed += 0.1f;
 
         UIControl.UIManager.ufoSpeedText.text = "Ufo's Move Speed: " + System.Math.Round(ufoSpeed, 2);
-        GameControl.gameManager.spaceMine("reduce", GameControl.gameManager.spaceMineForSpeedUpgrade);
-        GameControl.gameManager.spaceMineForSpeedUpgrade += GameControl.gameManager.spaceMineForSpeedUpgrade;
-        UIControl.UIManager.upgradeControl();
+        GameControl.gameManager.SpaceMine("reduce", GameControl.gameManager.spaceMineForSpeedUpgrade);
+        GameControl.gameManager.spaceMineForSpeedUpgrade += GameControl.gameManager.spaceMineForSpeedUpgrade / 2;
+        UIControl.UIManager.UpgradeControl();
         GameControl.gameManager.maxSpaceMine += 1;
 
-        saveUfoData();
-        GameControl.gameManager.saveGameData();
+        SaveUfoData();
+        GameControl.gameManager.SaveGameData();
     }
     #endregion
 
@@ -283,33 +283,33 @@ public class UfoControl : MonoBehaviour
 
         if (col.transform.tag == "oyunBittiSinirTag") // eğer ufo ezildiyse
         {
-            ufoExploded();
+            UfoExploded();
         }
 
         if (col.transform.tag == "ucanCisimTag")
         {
             if (col.transform.GetComponent<SpriteRenderer>().color == transform.GetComponent<SpriteRenderer>().color)
             {
-                FindObjectOfType<SoundControl>().sesOynat("Puan"); //puan sesini oynat
+                FindObjectOfType<SoundControl>().SesOynat("Puan"); //puan sesini oynat
                 col.gameObject.SetActive(false);
-                GameControl.gameManager.increaseScore(1);
-                energyBarAction("increase", 0.005f);
+                GameControl.gameManager.IncreaseScore(1);
+                EnergyBarAction("increase", 0.005f);
                 int incSpaceMineValue = Random.Range(1, GameControl.gameManager.maxSpaceMine + 1);
                 //Debug.Log(incSpaceMineValue);
-                GameControl.gameManager.spaceMine("increase", incSpaceMineValue);
+                GameControl.gameManager.SpaceMine("increase", incSpaceMineValue);
             }
             else
             {
-                FindObjectOfType<SoundControl>().sesOynat("Carpma"); //carpma sesini oynat
+                FindObjectOfType<SoundControl>().SesOynat("Carpma"); //carpma sesini oynat
                 col.gameObject.SetActive(false);
-                healthBarAction("reduce", durEffectValue);
+                HealthBarAction("reduce", durEffectValue);
             }
         }
 
         if (col.transform.tag == "meteorTag")
         {
             col.gameObject.SetActive(false);
-            ufoExploded();
+            UfoExploded();
         }
 
 
@@ -317,9 +317,9 @@ public class UfoControl : MonoBehaviour
         {
             if (healthBar.fillAmount < 1f) //can full değilse
             {
-                FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
+                FindObjectOfType<SoundControl>().SesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 col.gameObject.SetActive(false);
-                healthBarAction("increase", durEffectValue * 2);
+                HealthBarAction("increase", durEffectValue * 2);
             }
             else
             {
@@ -331,9 +331,9 @@ public class UfoControl : MonoBehaviour
         {
             if (energyBar.fillAmount < 1) //enerji full değilse
             {
-                FindObjectOfType<SoundControl>().sesOynat("CanveEnerji"); //can ve enerji sesini oynat
+                FindObjectOfType<SoundControl>().SesOynat("CanveEnerji"); //can ve enerji sesini oynat
                 col.gameObject.SetActive(false);
-                energyBarAction("increase", 0.2f);
+                EnergyBarAction("increase", 0.2f);
                 moveControl = true;
             }
             else
@@ -346,9 +346,9 @@ public class UfoControl : MonoBehaviour
         {
             if (Time.timeScale >= 0.6f)
             {
-                FindObjectOfType<SoundControl>().sesOynat("Yavaslatma"); //yavaslatma sesini oynat
+                FindObjectOfType<SoundControl>().SesOynat("Yavaslatma"); //yavaslatma sesini oynat
                 col.gameObject.SetActive(false);
-                GameControl.gameManager.gameSpeed("reduce", 0.1f);
+                GameControl.gameManager.GameSpeed("reduce", 0.1f);
             }
             else
             {
@@ -363,22 +363,22 @@ public class UfoControl : MonoBehaviour
     {
         if (col.gameObject.tag == "randomEngelTag")
         {
-            FindObjectOfType<SoundControl>().sesOynat("EngelPuan"); //EngelPuan sesini oynat
-            GameControl.gameManager.increaseScore(5);
-            energyBarAction("increase", 0.015f);
+            FindObjectOfType<SoundControl>().SesOynat("EngelPuan"); //EngelPuan sesini oynat
+            GameControl.gameManager.IncreaseScore(5);
+            EnergyBarAction("increase", 0.015f);
         }
     }
     #endregion
 
     #region Save and Load System
-    private void saveUfoData()
+    private void SaveUfoData()
     {
-        SaveSystem.saveUfoData(this);
+        SaveSystem.SaveUfoData(this);
     }
 
-    private void loadUfoData()
+    private void LoadUfoData()
     {
-        UfoData ufoData = SaveSystem.loadUfoData();
+        UfoData ufoData = SaveSystem.LoadUfoData();
 
         if (ufoData != null)
         {

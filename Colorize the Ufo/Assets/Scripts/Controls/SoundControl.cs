@@ -21,10 +21,10 @@ public class SoundControl : MonoBehaviour {
 
     private void Start()
     {
-        soundControl();
+        SoundStateControl();
     }
 
-    public void sesOynat(string sesAdi) //bu metot ile ismine göre seslerimizi istediğimiz yerde oynatacağız.
+    public void SesOynat(string sesAdi) //bu metot ile ismine göre seslerimizi istediğimiz yerde oynatacağız.
     {
         SoundsList s =  Array.Find(sesler, ses => ses.sesAdi == sesAdi);
         if (s == null)
@@ -35,7 +35,7 @@ public class SoundControl : MonoBehaviour {
         s.source.Play();
     }
 
-    public void soundsMuteAndUnmute()
+    public void SoundsMuteAndUnmute()
     {
         if (PlayerPrefs.GetInt("sesAcikMiKapaliMi") == 0) //ses açıksa
         {
@@ -51,7 +51,7 @@ public class SoundControl : MonoBehaviour {
         }
     }
 
-    private void soundControl() //restart sonrası ses acik veya kapali sprite sorununu çözen fonksiyon
+    private void SoundStateControl() //restart sonrası ses acik veya kapali sprite sorununu çözen fonksiyon
     {
         if ((PlayerPrefs.GetInt("sesAcikMiKapaliMi")) == 0)
         {

@@ -23,16 +23,16 @@ public class SpaceObject : MonoBehaviour, ISpaceObject
 
     public void Update()
     {
-        makeObjectKinematic();
+        MakeObjectKinematic();
     }
 
-    public void objectMovement()
+    public void ObjectMovement()
     {
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = new Vector2(0, -objectSpeed);
     }
 
-    public void makeObjectKinematic() //iki kinematic obje arasında collision çalışmadığı için böyle bir çözüm buldum.
+    public void MakeObjectKinematic() //iki kinematic obje arasında collision çalışmadığı için böyle bir çözüm buldum.
     {
         if (transform.position.y <= makeKinematicBorder)
         {

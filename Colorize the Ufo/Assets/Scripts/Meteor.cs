@@ -8,7 +8,7 @@ public class Meteor : SpaceObject {
     private new void Start()
     {
         base.Start();
-        chooseMeteorType();
+        ChooseMeteorType();
     }
 
     private new void Update()
@@ -16,7 +16,7 @@ public class Meteor : SpaceObject {
         base.Update();
     }
 
-    private void chooseMeteorType()
+    private void ChooseMeteorType()
     {
 
         spriteRenderer.sprite = meteorTypeSprites[Random.Range(0, meteorTypeSprites.Length)];

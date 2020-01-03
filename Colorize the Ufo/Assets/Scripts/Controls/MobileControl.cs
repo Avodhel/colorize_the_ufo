@@ -42,10 +42,10 @@ public class MobileControl : MonoBehaviour {
 
     private void Start ()
     {
-        makeVisible();
+        MakeVisible();
     }
 
-    private void makeVisible()
+    private void MakeVisible()
     {
         leftImage.color = new Color(leftImage.color.r, leftImage.color.g, leftImage.color.b, 1f);
         rightImage.color = new Color(rightImage.color.r, rightImage.color.g, rightImage.color.b, 1f);
@@ -56,19 +56,19 @@ public class MobileControl : MonoBehaviour {
         changeColorText.enabled = true;
     }
 
-    public void leftClicked()
+    public void LeftClicked()
     {
         leftImage.color = new Color(leftImage.color.r, leftImage.color.g, leftImage.color.b, 0f);
         leftText.enabled = false;
     }
 
-    public void rightClicked()
+    public void RightClicked()
     {
         rightImage.color = new Color(rightImage.color.r, rightImage.color.g, rightImage.color.b, 0f);
         rightText.enabled = false;
     }
 
-    public void changeColorClicked()
+    public void ChangeColorClicked()
     {
         changeColorImage.color = new Color(changeColorImage.color.r, changeColorImage.color.g, changeColorImage.color.b, 0f);
         changeColorText.enabled = false;

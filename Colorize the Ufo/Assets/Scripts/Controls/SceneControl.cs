@@ -23,12 +23,12 @@ public class SceneControl : MonoBehaviour {
         }
     }
 
-    public void loadScene(int scene)
+    public void LoadScene(int scene)
     {
-        StartCoroutine(transitionBetweenScenes(scene));
+        StartCoroutine(TransitionBetweenScenes(scene));
     }
 
-    private IEnumerator transitionBetweenScenes(int scene)
+    private IEnumerator TransitionBetweenScenes(int scene)
     {
         transitionAnim.SetTrigger("transition");
         yield return new WaitUntil(()=>transitionPanel.GetComponent<Image>().color.a == 1);

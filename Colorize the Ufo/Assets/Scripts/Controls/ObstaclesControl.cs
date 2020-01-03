@@ -11,10 +11,10 @@ public class ObstaclesControl : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(spawnObstacles());
+        StartCoroutine(SpawnObstacles());
     }
 
-    private IEnumerator spawnObstacles()
+    private IEnumerator SpawnObstacles()
     {
         yield return new WaitForSeconds(startWaitTime);
         while (true)
@@ -23,8 +23,8 @@ public class ObstaclesControl : MonoBehaviour
             GameObject obstacle = ObstaclePooler.SharedInstance.GetPooledObject(Random.Range(0, ObstaclePooler.SharedInstance.itemsToPool.Count));
             obstacle.SetActive(true);
             obstacle.transform.position = obstaclePos;
-            obstacle.GetComponent<IObstacle>().obstacleMovement();
-            obstacle.GetComponent<IObstacle>().changeColor();
+            obstacle.GetComponent<IObstacle>().ObstacleMovement();
+            obstacle.GetComponent<IObstacle>().ChangeColor();
 
             yield return new WaitForSeconds(spawnObstacleTime);
         }

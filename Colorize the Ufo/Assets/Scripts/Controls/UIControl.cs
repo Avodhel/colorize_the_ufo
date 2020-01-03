@@ -59,17 +59,21 @@ public class UIControl : MonoBehaviour {
 
     private void Start()
     {
-        upgradeControl();
-
+        UpgradeControl();
 #if UNITY_WEBGL
+        ShowTutorial();
+#endif
+    }
+
+    private void ShowTutorial()
+    {
         if (GameControl.gameManager.showPcControlTutorial)
         {
             pcControlTutorial.SetActive(true);
         }
-#endif
     }
 
-    public void upgradeControl()
+    public void UpgradeControl()
     {
         //Durability
         if (GameControl.gameManager.spaceMineValue >= GameControl.gameManager.spaceMineForDurUpgrade)

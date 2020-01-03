@@ -11,13 +11,13 @@ public class Obstacle : MonoBehaviour, IObstacle
         gameObject.SetActive(false);
     }
 
-    public void obstacleMovement()
+    public void ObstacleMovement()
     {
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = new Vector2(0, -2); // engellerimizin hareket etmesi için.
     }
 
-    public void changeColor()
+    public void ChangeColor()
     {
         colors = GameControl.gameManager.colors;
         for (int a = 0; a < transform.childCount; a++)

@@ -10,22 +10,22 @@ public class FlyingStone : SpaceObject {
         colors = GameControl.gameManager.colors;
         if (gameObject.tag == "ucanCisimTag")
         {
-            chooseColor();
+            ChooseColor();
         }
     }
 
     private new void Update()
     {
         base.Update();
-        rotateObject();
+        RotateObject();
     }
 
-    void rotateObject()
+    private void RotateObject()
     {
         transform.Rotate(new Vector3(0, 0, Random.Range(0f, 360f)) * Time.deltaTime);
     }
 
-    private void chooseColor()
+    private void ChooseColor()
     {
         if (colors.Length != 0)
         {

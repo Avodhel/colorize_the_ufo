@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem {
 
     #region Ufo Data
-    public static void saveUfoData(UfoControl ufoControl)
+    public static void SaveUfoData(UfoControl ufoControl)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Path.Combine(Application.persistentDataPath, "ufo.fun");
@@ -17,7 +17,7 @@ public static class SaveSystem {
         stream.Close();
     }
 
-    public static UfoData loadUfoData()
+    public static UfoData LoadUfoData()
     {
         string path = Path.Combine(Application.persistentDataPath, "ufo.fun");
 
@@ -39,7 +39,7 @@ public static class SaveSystem {
     #endregion
 
     #region Game Data
-    public static void saveGameData(GameControl gameControl)
+    public static void SaveGameData(GameControl gameControl)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Path.Combine(Application.persistentDataPath, "game.fun");
@@ -51,7 +51,7 @@ public static class SaveSystem {
         stream.Close();
     }
 
-    public static GameData loadGameData()
+    public static GameData LoadGameData()
     {
         string path = Path.Combine(Application.persistentDataPath, "game.fun");
 
@@ -72,7 +72,7 @@ public static class SaveSystem {
     }
     #endregion
 
-    public static void deleteDatas()
+    public static void DeleteDatas()
     {
         File.Delete(Application.persistentDataPath + "/ufo.fun");
         File.Delete(Application.persistentDataPath + "/game.fun");

@@ -38,9 +38,9 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
         }
 
-        loadGameData();
-        loadValues();
-        loadHighscore();
+        LoadGameData();
+        LoadValues();
+        LoadHighscore();
     }
 
     private void Start()
@@ -49,7 +49,7 @@ public class GameControl : MonoBehaviour
         //SaveSystem.deleteDatas();
     }
 
-    private void loadValues()
+    private void LoadValues()
     {
         point = 0;
         UIControl.UIManager.pointText.text = "Score: " + point;
@@ -61,18 +61,18 @@ public class GameControl : MonoBehaviour
     }
 
     #region Score and Highscore
-    public void increaseScore(int value)
+    public void IncreaseScore(int value)
     {
         point += value;
         UIControl.UIManager.pointText.text = "Score: " + point;
     }
 
-    private void loadHighscore()
+    private void LoadHighscore()
     {
         enYuksekPuan = PlayerPrefs.GetInt("enYuksekPuanKayit"); // en yüksek puan bilgimi çekiyorum.
     }
 
-    private void assignHighscore()
+    private void AssignHighscore()
     {
         if (point > enYuksekPuan) // en yüksek puan için koşul
         {
@@ -83,7 +83,7 @@ public class GameControl : MonoBehaviour
     }
     #endregion
 
-    public void gameSpeed(string state, float value)
+    public void GameSpeed(string state, float value)
     {
         if (state == "increase")
         {
@@ -97,7 +97,7 @@ public class GameControl : MonoBehaviour
         UIControl.UIManager.speedText.text = "Speed: " + System.Math.Round(Time.timeScale, 2);
     }
 
-    public void spaceMine(string state, int value)
+    public void SpaceMine(string state, int value)
     {
         if (state == "increase")
         {
@@ -111,37 +111,37 @@ public class GameControl : MonoBehaviour
         UIControl.UIManager.spaceMineText.text = "x " + spaceMineValue;
     }
 
-    public void gameOver()
+    public void GameOver()
     {
         UIControl.UIManager.gameOverPanel.SetActive(true);
-        assignHighscore();
+        AssignHighscore();
         UIControl.UIManager.pauseGameButton.SetActive(false);
 
         //check out mines for upgrade system
-        UIControl.UIManager.upgradeControl();
+        UIControl.UIManager.UpgradeControl();
 
         //disable Pc Control tutorial
         UIControl.UIManager.pcControlTutorial.SetActive(false);
         showPcControlTutorial = false;
 
         //save game datas
-        saveGameData();
+        SaveGameData();
 
         //game over counter for ad
         gameOverCounter = PlayerPrefs.GetInt("oyunBittiSayac");
         gameOverCounter++;
         PlayerPrefs.SetInt("oyunBittiSayac", gameOverCounter);
 
-        showAd();
+        ShowAd();
     }
 
     #region Show Ad
-    private void showAd()
+    private void ShowAd()
     {
         if (PlayerPrefs.GetInt("oyunBittiSayac") == 3) //3 kere oyun bittiğinde reklam göster
         {
 #if UNITY_ANDROID
-            GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<AdControl>().reklamiGoster();
+            GameObject.FindGameObjectWithTag("reklamKontrolTag").GetComponent<AdControl>().ReklamiGoster();
 #endif
             PlayerPrefs.SetInt("oyunBittiSayac", 0);
         }
@@ -149,18 +149,18 @@ public class GameControl : MonoBehaviour
     #endregion
 
     #region Button Actions
-    public void goToMainMenu()
+    public void GoToMainMenu()
     {
-        SceneControl.sceneManager.loadScene(0);
+        SceneControl.sceneManager.LoadScene(0);
     }
 
-    public void restartGame()
+    public void RestartGame()
     {
         UIControl.UIManager.gameOverPanel.SetActive(false);
-        SceneControl.sceneManager.loadScene(1);
+        SceneControl.sceneManager.LoadScene(1);
     }
 
-    public void gamePauseAndUnpause() //oyunu durdur butonuna basıldığında
+    public void GamePauseAndUnpause() //oyunu durdur butonuna basıldığında
     {
         if (Time.timeScale > 0) //oyun devam ediyorsa
         {
@@ -183,14 +183,14 @@ public class GameControl : MonoBehaviour
     #endregion
 
     #region Save and Load System
-    public void saveGameData()
+    public void SaveGameData()
     {
-        SaveSystem.saveGameData(this);
+        SaveSystem.SaveGameData(this);
     }
 
-    public void loadGameData()
+    public void LoadGameData()
     {
-        GameData gameData = SaveSystem.loadGameData();
+        GameData gameData = SaveSystem.LoadGameData();
 
         if (gameData != null)
         {

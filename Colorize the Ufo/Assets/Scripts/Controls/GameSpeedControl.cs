@@ -6,16 +6,16 @@ public class GameSpeedControl : MonoBehaviour {
 	
 	private void Update ()
     {
-        gameSpeedChange();
+        GameSpeedChange();
     }
 
-    private void gameSpeedChange()
+    private void GameSpeedChange()
     {
         gameSpeedChangeTime += Time.deltaTime;
 
         while (gameSpeedChangeTime > 5f) 
         {
-            GameControl.gameManager.gameSpeed("increase", 0.02f);
+            GameControl.gameManager.GameSpeed("increase", 0.02f);
             gameSpeedChangeTime = 0f;
         }
     }

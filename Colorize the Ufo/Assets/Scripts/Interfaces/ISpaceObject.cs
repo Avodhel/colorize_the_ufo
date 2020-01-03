@@ -1,4 +1,4 @@
 ﻿public interface ISpaceObject
 {
-    void objectMovement();
+    void ObjectMovement();
 }
