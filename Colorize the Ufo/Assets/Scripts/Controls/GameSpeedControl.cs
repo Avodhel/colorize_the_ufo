@@ -13,7 +13,7 @@ public class GameSpeedControl : MonoBehaviour {
     {
         gameSpeedChangeTime += Time.deltaTime;
 
-        while (gameSpeedChangeTime > 5f) 
+        while (gameSpeedChangeTime > 2f) 
         {
             GameControl.gameManager.GameSpeed("increase", 0.02f);
             gameSpeedChangeTime = 0f;

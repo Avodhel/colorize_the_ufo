@@ -38,6 +38,7 @@ QualitySettings:
     particleRaycastBudget: 4
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
+    asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -72,6 +73,7 @@ QualitySettings:
     particleRaycastBudget: 16
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
+    asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -106,6 +108,7 @@ QualitySettings:
     particleRaycastBudget: 64
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
+    asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -140,18 +143,19 @@ QualitySettings:
     particleRaycastBudget: 256
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
+    asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
-    Android: 0
+    Android: 1
     Nintendo 3DS: 3
     Nintendo Switch: 3
     PS4: 3
     PSM: 3
     PSP2: 2
-    Standalone: 2
+    Standalone: 3
     Tizen: 2
-    WebGL: 1
+    WebGL: 2
     WiiU: 3
     Windows Store Apps: 3
     XboxOne: 3
