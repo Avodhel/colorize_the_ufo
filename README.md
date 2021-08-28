@@ -5,7 +5,7 @@ Colorize the Ufo is a simple 2D game. Change Ufo's color, collect the objects wh
 
 # LINKS
 
-- [Itch.io](https://nordicebear.itch.io/colorize-the-ufo)
+- [Itch.io](https://avodhel.itch.io/colorize-the-ufo)
 - [Google Play](https://play.google.com/store/apps/details?id=com.Nordicebear_Games.Colorize_the_Ufo)
 
 # CREDITS
